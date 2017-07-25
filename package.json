@@ -1,0 +1,47 @@
+{
+  "name": "logindemo",
+  "description": "The best project ever.",
+  "version": "1.0.0",
+  "author": {
+    "name": "umi-zhaogui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/umi/logindemo.git"
+  },
+  "main": "lib/index",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "start": "./bin/start.sh"
+  },
+  "dependencies": {
+    "async": "^1.3.0",
+    "ejs": "^1.0.0",
+    "excel-export": "^0.5.1",
+    "express": "^4.13.0",
+    "express-session": "^1.11.3",
+    "kraken-js": "^1.0.5",
+    "kraken-middleware": "^1.0.0",
+    "moment": "^2.10.3",
+    "uid2": "0.0.3",
+    "util-format": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-umi-fis": "^1.0.1",
+    "grunt-umi-layout": "^1.0.0",
+    "grunt-umi-qiniu": "^1.0.0",
+    "log4js": "^0.6.29",
+    "mongoose": "^4.1.1",
+    "util-captcha": "^2.1.0",
+    "util-cipher": "^2.0.0"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "registry": "http://m2.umiit.cn/content/repositories/npm-umi/"
+  }
+}

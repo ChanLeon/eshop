@@ -1,0 +1,13 @@
+#navigation {
+    margin-top: 50px;
+    color: #fff;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+.content {   
+    font-size: 18px;
+}
+.dropdown {
+     margin-left: 20%; 
+}

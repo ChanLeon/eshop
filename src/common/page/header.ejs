@@ -1,0 +1,37 @@
+<!--
+    @require "../static/css/header.css"
+    @require "../static/js/header.js"
+-->
+<div class="navbar navbar-inverse" id='navigation' role="navigation">
+    <div class="navbar-inner">
+        <div class="container" style='margin-left: 0; margin-right: 0;'>  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:void(0)">浩华潮流时装</a>
+            </div>
+            <div class="content" style='width: 100%;margin-left: 20%;'>
+                <ul class="nav navbar-nav" style='width: 100%;'>
+                    <li <% if (locals.index == 'index') {%> class="active" <%}%>><a href="/">首页</a></li>
+                    <li <% if (locals.womenCloth == 'womenCloth') {%> class="active" <%}%>><a href="/product/womenCloth">时尚女装</a></li>
+                    <li <% if (locals.womenBag == 'womenBag') {%> class="active" <%}%>><a href="/product/womenBag">潮流女包</a></li>
+                    <li <% if (locals.womenShoes == 'womenShoes') {%> class="active" <%}%>><a href="/product/womenShoes">前卫女鞋</a></li>
+                    <li <% if (locals.childCloth == 'childCloth') {%> class="active" <%}%>><a href="/product/childCloth">酷帅儿童装</a></li>
+                    <li id='contact' class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">联系客服<span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">QQ号：12345678</a></li>
+                            <li><a href="#">微信号：12345678</a></li>
+                            <li><a href="#">联系方式：15989235164</a></li>
+                            <li><a href="#">电子邮箱：123456894@qq.com</a></li>
+                        </ul>
+                    </li>
+                    <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
+                    <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
+                    <li class='search'> 
+                        <input name="search" type="text" id="search" placeholder="查询">                       
+                        <a id='searchInput' class='glyphicon glyphicon-search' href=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

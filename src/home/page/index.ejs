@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--inline[../../common/page/head.ejs]-->
+        <!-- 
+            @require "../static/index.js"
+            @require "../static/slide.js"
+            @require "../static/index.css"
+        -->
+    </head>
+    <body>
+        <!--inline[../../common/page/header.ejs]-->
+        <div class='pic_scroll'>
+            <div class="wrapper" id="wrapper">
+                <img class='bg1' style='display: none;' src='../static/image/pic_scroll/bg1.png'>
+                <img class='bg2' style='display: none;' src='../static/image/pic_scroll/bg2.png'>
+                <img class='bg3' style='display: none;' src='../static/image/pic_scroll/bg3.png'>
+                <img class='bg4' style='display: none;' src='../static/image/pic_scroll/bg4.png'>
+            </div>
+        </div>
+        <div class='container'>
+            <div style='width:1080px;height:400px;background-color:#333;'></div>
+            <div style='width:1080px;height:400px;background-color:#333;'></div>
+            <div style='width:1080px;height:400px;background-color:#333;'></div>
+            <div style='width:1080px;height:400px;background-color:#333;'></div>
+        </div>
+        <!--inline[../../common/page/footer.ejs]-->
+        <!--inline[../../common/page/foot.ejs]-->
+        <script>
+            $(function () {
+                var slider1 = new Slider();
+                var doc_h = $(document.body).width();
+                //btn_left,btn_right可以任意一个或两个都为null
+                slider1.inital('sliderBox', 'btn_left','btn_right',{
+                    slider_num: 4,
+                    w: doc_h,
+                    h: 760
+                });
+            });
+        </script>
+    </body>
+</html>

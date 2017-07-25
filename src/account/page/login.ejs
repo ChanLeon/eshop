@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!--inline[../../common/page/head.ejs]-->
+        <!-- 
+            @require "../static/index.js"
+            @require "../static/index.css"
+        -->
+</head>
+<body>
+	<!--inline[../../common/page/header.ejs]-->
+	<div class="container bak">
+		<div class="col-xs-12">
+			<div class="panel">
+				<div class='panel-heading'>
+					<h2>请登录</h2>
+				</div>
+				<div class='panel-body' style='margin: 70px 30px 70px 30px;'>
+					<div class='text-left col-xs-6'>
+						<form action="/account/login" method="post" id="form">
+							<div class="form-group">
+								<label for="username">用户名：</label>
+								<input type="text" class="form-control user" name="user" placeholder="请选择用户名">
+							</div>
+							<div class="form-group">
+								<label for="password">密码：</label>
+								<input type="password" name="password" class="form-control pass" placeholder="请填写密码">
+							</div>
+							<input type="hidden" name="_csrf" value="<%-locals._csrf%>">
+							<button class="btn btn-default log">登录</button>
+						</form>
+					</div>
+					<div class='text-right col-xs-6'>
+
+					</div>
+				</div>
+			</div>
+			<div>
+				<button type='button' class="btn btn-danger" style='color:#fff;padding:8px 20px;margin-left:15px;'>取消</button>
+			</div>
+		</div>
+	</div>
+	<!--inline[../../common/page/footer.ejs]-->
+    <!--inline[../../common/page/foot.ejs]-->
+</body>
+</html>

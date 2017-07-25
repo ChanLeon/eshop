@@ -1,0 +1,16 @@
+#navigation {
+    color: #fff;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+.content {   
+    font-size: 18px;
+}
+#contact {
+     margin-left: 20%; 
+}
+#contact ul.dropdown-menu li{
+    line-height:30px;
+    border-bottom:1px solid #999;
+}

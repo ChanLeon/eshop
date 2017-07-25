@@ -1,0 +1,24 @@
+#navigation {
+    color: #fff;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+.content {   
+    font-size: 18px;
+}
+#contact ul.dropdown-menu li {
+    border-bottom:1px solid #eee;
+    padding:10px 0;
+}
+#contact ul.dropdown-menu li:last-child {
+    border-bottom:0;
+}
+.search #search {
+    position:relative;
+}
+.search #searchInput {
+    position:absolute;
+    top:0;
+    left:0;
+}

@@ -1,0 +1,14 @@
+#navigation {
+    margin-top: 50px;
+    color: #fff;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+.navbar-responsive-collapse {
+    font-size: 18px;
+    margin-left: 10%;
+}
+.dropdown {
+    /* margin-left: 10%; */
+}

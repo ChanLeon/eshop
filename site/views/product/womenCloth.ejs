@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="webkit" name="renderer">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.1.0/css/font-awesome.min.css">
+<style>
+	@media (min-width: 0px) {
+		.container {
+		    min-width: 1080px;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.container {
+		    width: 1080px;
+		}
+	}
+
+	@media (min-width: 992px) {
+		.container {
+		    width: 1080px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.container {
+		    width: 1080px;
+		}
+	}
+
+	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,button,p,th,td {
+		font-family: 'STXihei', 'STHeiti Light','SimSun','Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif!important;
+		font-weight: lighter;
+	}
+	body {
+		padding: 0;
+		margin: 0;
+	}
+</style>
+<script>
+	window.onload = function(){
+        var browser = navigator.appName,
+            b_version = navigator.appVersion,
+            version = b_version.split(";"),
+            trim_Version = version[1].replace(/[ ]/g,""); 
+        if(browser == "Microsoft Internet Explorer" && (trim_Version == "MSIE6.0" || trim_Version == "MSIE7.0" || trim_Version == "MSIE8.0" || trim_Version == "MSIE9.0")){ 
+            alert("你当前浏览器无法正常加载页面，请升级浏览器");
+            window.location.href = 'https://browsehappy.com/';
+            return false;
+        } 
+    }
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?782c75c0cdcb17342ab463187fb854ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link href="/static/product/index_d41d8cd.css" rel="stylesheet">
+<link href="/static/common/css/header_568c338.css" rel="stylesheet">
+<link href="/static/common/css/footer_6c13149.css" rel="stylesheet">
+
+        <!-- 
+            @require "product/static/index.js"
+            @require "product/static/index.css"
+        -->
+    </head>
+    <body>
+        <!--
+    @require "common/static/css/header.css"
+    @require "common/static/js/header.js"
+-->
+<div class="navbar navbar-inverse" id='navigation' role="navigation">
+    <div class="navbar-inner">
+        <div class="container" style='margin-left: 0; margin-right: 0;'>  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:void(0)">浩华潮流时装</a>
+            </div>
+            <div class="content" style='width: 100%;margin-left: 20%;'>
+                <ul class="nav navbar-nav" style='width: 100%;'>
+                    <li <% if (locals.index == 'index') {%> class="active" <%}%>><a href="/">首页</a></li>
+                    <li <% if (locals.womenCloth == 'womenCloth') {%> class="active" <%}%>><a href="/product/womenCloth">时尚女装</a></li>
+                    <li <% if (locals.womenBag == 'womenBag') {%> class="active" <%}%>><a href="/product/womenBag">潮流女包</a></li>
+                    <li <% if (locals.womenShoes == 'womenShoes') {%> class="active" <%}%>><a href="/product/womenShoes">前卫女鞋</a></li>
+                    <li <% if (locals.childCloth == 'childCloth') {%> class="active" <%}%>><a href="/product/childCloth">酷帅儿童装</a></li>
+                    <li id='contact' class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">联系客服<span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">QQ号：12345678</a></li>
+                            <li><a href="#">微信号：12345678</a></li>
+                            <li><a href="#">联系方式：15989235164</a></li>
+                            <li><a href="#">电子邮箱：123456894@qq.com</a></li>
+                        </ul>
+                    </li>
+                    <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
+                    <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
+                    <li class='search'> 
+                        <input name="search" type="text" id="search" placeholder="查询">                       
+                        <a id='searchInput' class='glyphicon glyphicon-search' href=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class=''>
+
+        </div>
+        <!--
+    @require "common/static/css/footer.css"
+-->
+<div class="footer">
+    <div class="container" style="padding: 0;">                
+        <div class="row contact">
+            <div>
+                <h4 class="title"><a href="/other/index"><span>关于</span>我们</a></h4>
+                <ul class="list-inline">
+                    <li><a href="/other/?type=1">公司简介</a></li>
+                    <li><a href="/other/?type=1#groups">管理团队</a></li>
+                </ul>
+                <ul class="list-inline">
+                    <li style="margin-right: 16px;"><a href="/other/?type=38">派派猪乐园</a></li>
+                    <li><a href="/other/?type=2">人才招聘</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="title"><a href="/doc/help"><span>帮助</span>中心</a></h4>
+                <ul class="list-inline">
+                    <li><a href="/doc/xszn" target="_blank">新手指南</a></li>
+                    <li><a href="/doc/help#questions">常见问题</a></li>
+                </ul>
+                <ul class="list-inline">
+                    <li><a href="/doc/aqbz" target="_blank">风险控制</a></li>
+                </ul>
+            </div>
+
+            <div style="margin-right: 48px;">
+                <h4 class="title">客服热线</h4>
+                <h1 style="font-size: 16px; margin-bottom: 6px;">4000-689-360</h1>
+                <h3 style="margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.6);">(8:30~18:00)</h3>
+                <ul class="list-inline join">
+                    <li>
+                        <a rel="nofollow" href="https://weibo.com/5371061117/profile"><span>关注微博</span><img src="/static/common/image/ico_weibo__b88851a.png"></a>
+                    </li>
+                    <li>
+                        <a rel="nofollow" href="https://shang.qq.com/wpa/qunwpa?idkey=9282c8eca70dded38999d60812fb62e91b4d4ae02cb5442948b97175a0d5721c"><span>加入&nbsp;Q&nbsp;群</span><img src="/static/common/image/ico_qq__e008ea7.png"></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <img src="/static/common/image/QR_Code__3c27e66.png" class="img-responsive">
+            </div>
+        </div>
+    </div>
+    <div class="friend-link">
+        <div class="container">
+            友情链接：
+            <a rel="nofollow" href="http://www.wangdaizhijia.com" target="_blank">网贷之家</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a rel="nofollow" href="http://www.p2peye.com" target="_blank">网贷天眼</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a rel="nofollow" href="http://www.51wangdai.com/" target="_blank">51网贷</a>
+        </div>
+    </div>
+    <div class="copyright text-center">
+        <div class="container">
+            &copy; 2014 广州易票宝互联网金融信息服务有限公司 版权所有. <a rel="nofollow" href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备 14073354-2 号</a>
+            <p style="margin-top: 16px; margin-bottom: 0;">理财有风险 投资须谨慎</p>
+        </div>
+    </div>
+</div>
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
+<script src="/static/product/index_d41d8cd.js"></script>
+<script src="/static/common/js/header_0beeb39.js"></script>
+
+    </body>
+</html>

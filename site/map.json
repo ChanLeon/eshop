@@ -1,0 +1,242 @@
+{
+    "res": {
+        "account/page/login.ejs": {
+            "uri": "/views/account/login.ejs",
+            "type": "ejs",
+            "deps": [
+                "account/static/index.js",
+                "account/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "account/page/register.ejs": {
+            "uri": "/views/account/register.ejs",
+            "type": "ejs",
+            "deps": [
+                "account/static/index.js",
+                "account/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "account/static/index.css": {
+            "uri": "/static/account/index_1151a90.css",
+            "type": "css"
+        },
+        "account/static/index.js": {
+            "uri": "/static/account/index_6da3651.js",
+            "type": "js",
+            "deps": [
+                "account/static/index.css"
+            ]
+        },
+        "common/static/css/footer.css": {
+            "uri": "/static/common/css/footer_6c13149.css",
+            "type": "css"
+        },
+        "common/static/css/header.css": {
+            "uri": "/static/common/css/header_568c338.css",
+            "type": "css"
+        },
+        "common/static/js/footer.js": {
+            "uri": "/static/common/js/footer_d41d8cd.js",
+            "type": "js"
+        },
+        "common/static/js/header.js": {
+            "uri": "/static/common/js/header_0beeb39.js",
+            "type": "js"
+        },
+        "common/static/lib/bootstrap.min.css": {
+            "uri": "/static/common/lib/bootstrap.min_78e7f91.css",
+            "type": "css"
+        },
+        "common/static/lib/bootstrap.min.js": {
+            "uri": "/static/common/lib/bootstrap.min_ba84781.js",
+            "type": "js",
+            "deps": [
+                "common/static/lib/bootstrap.min.css"
+            ]
+        },
+        "common/static/lib/dataTablePlugin.js": {
+            "uri": "/static/common/lib/dataTablePlugin_650a0c7.js",
+            "type": "js"
+        },
+        "common/static/lib/datepicker.css": {
+            "uri": "/static/common/lib/datepicker_12a44b5.css",
+            "type": "css"
+        },
+        "common/static/lib/datepicker.js": {
+            "uri": "/static/common/lib/datepicker_f619fb3.js",
+            "type": "js",
+            "deps": [
+                "common/static/lib/datepicker.css"
+            ]
+        },
+        "common/static/lib/flexslider-min.css": {
+            "uri": "/static/common/lib/flexslider-min_3d374b1.css",
+            "type": "css"
+        },
+        "common/static/lib/font-awesome.min.css": {
+            "uri": "/static/common/lib/font-awesome.min_bbfef93.css",
+            "type": "css"
+        },
+        "common/static/lib/jquery.dataTables.css": {
+            "uri": "/static/common/lib/jquery.dataTables_05951ed.css",
+            "type": "css"
+        },
+        "common/static/lib/jquery.dataTables.js": {
+            "uri": "/static/common/lib/jquery.dataTables_56d75a6.js",
+            "type": "js",
+            "deps": [
+                "jquery",
+                "common/static/lib/jquery.dataTables.css"
+            ]
+        },
+        "common/static/lib/jquery.flexslider-min.js": {
+            "uri": "/static/common/lib/jquery.flexslider-min_3634ce1.js",
+            "type": "js"
+        },
+        "common/static/lib/jquery.min.js": {
+            "uri": "/static/common/lib/jquery.min_8101d59.js",
+            "type": "js"
+        },
+        "common/static/lib/validator.js": {
+            "uri": "/static/common/lib/validator_b10db59.js",
+            "type": "js"
+        },
+        "contact/page/index.ejs": {
+            "uri": "/views/contact/index.ejs",
+            "type": "ejs",
+            "deps": [
+                "contact/static/index.js",
+                "contact/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "contact/static/index.css": {
+            "uri": "/static/contact/index_d41d8cd.css",
+            "type": "css"
+        },
+        "contact/static/index.js": {
+            "uri": "/static/contact/index_d41d8cd.js",
+            "type": "js",
+            "deps": [
+                "contact/static/index.css"
+            ]
+        },
+        "error/page/404.ejs": {
+            "uri": "/views/error/404.ejs",
+            "type": "ejs"
+        },
+        "error/page/500.ejs": {
+            "uri": "/views/error/500.ejs",
+            "type": "ejs"
+        },
+        "home/page/index.ejs": {
+            "uri": "/views/home/index.ejs",
+            "type": "ejs",
+            "deps": [
+                "home/static/index.js",
+                "home/static/slide.js",
+                "home/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "home/static/index.css": {
+            "uri": "/static/home/index_76c5ac1.css",
+            "type": "css"
+        },
+        "home/static/index.js": {
+            "uri": "/static/home/index_d41d8cd.js",
+            "type": "js",
+            "deps": [
+                "home/static/index.css"
+            ]
+        },
+        "home/static/slide.js": {
+            "uri": "/static/home/slide_8455191.js",
+            "type": "js"
+        },
+        "nodeExcel/page/index.ejs": {
+            "uri": "/views/nodeExcel/index.ejs",
+            "type": "ejs",
+            "deps": [
+                "nodeExcel/static/index.js"
+            ]
+        },
+        "nodeExcel/static/index.css": {
+            "uri": "/static/nodeExcel/index_d41d8cd.css",
+            "type": "css"
+        },
+        "nodeExcel/static/index.js": {
+            "uri": "/static/nodeExcel/index_aa1ae85.js",
+            "type": "js",
+            "deps": [
+                "nodeExcel/static/index.css"
+            ]
+        },
+        "product/page/childCloth.ejs": {
+            "uri": "/views/product/childCloth.ejs",
+            "type": "ejs",
+            "deps": [
+                "product/static/index.js",
+                "product/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "product/page/womenBag.ejs": {
+            "uri": "/views/product/womenBag.ejs",
+            "type": "ejs",
+            "deps": [
+                "product/static/index.js",
+                "product/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "product/page/womenCloth.ejs": {
+            "uri": "/views/product/womenCloth.ejs",
+            "type": "ejs",
+            "deps": [
+                "product/static/index.js",
+                "product/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "product/page/womenShoes.ejs": {
+            "uri": "/views/product/womenShoes.ejs",
+            "type": "ejs",
+            "deps": [
+                "product/static/index.js",
+                "product/static/index.css",
+                "common/static/css/header.css",
+                "common/static/js/header.js",
+                "common/static/css/footer.css"
+            ]
+        },
+        "product/static/index.css": {
+            "uri": "/static/product/index_d41d8cd.css",
+            "type": "css"
+        },
+        "product/static/index.js": {
+            "uri": "/static/product/index_d41d8cd.js",
+            "type": "js",
+            "deps": [
+                "product/static/index.css"
+            ]
+        }
+    },
+    "pkg": {}
+}

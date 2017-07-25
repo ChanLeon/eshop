@@ -1,0 +1,32 @@
+body {
+	background-color: #f1f1f1;
+}
+.bak {
+	background:#fff;
+	margin: 120px auto;
+	padding:30px 30px;
+	border:1px solid #eee;
+	border-left-color: #ccc;
+	border-right-color: #ccc;
+	border-bottom-color: #ccc;
+	border-radius: 10px;
+}
+.panel {
+	border:0;
+	border-bottom:1px solid #ddd;
+}
+.panel .panel-heading {
+	background-color:transparent;
+	border-bottom:1px solid #ddd;
+}
+.panel .panel-body form label {
+	font-size:20px;
+	color: #333;
+}
+.log {
+	margin:0 90px;
+}
+
+
+
+

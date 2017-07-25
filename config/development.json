@@ -1,0 +1,52 @@
+{
+	"express": {
+		"view cache": false
+	},
+
+	"mongoConfig": {
+		"host": "192.168.33.10",
+        "database": "eshop"
+	},
+
+	"log4jsConfig": "path:./config/log4js_dev.json",
+
+	"middleware": {
+		"static": {
+			"module": {
+				"arguments": ["path:./site"]
+			}
+		},
+
+		"session": {
+			"enabled": true,
+			"priority": 100,
+			"module": {
+				"name": "express-session",
+				"arguments": [{
+					"key": "",
+					"secret": "6de5191ab3c401bcb266dff913",
+					"cookie": {
+						"path": "/",
+						"httpOnly": true,
+						"maxAge": 1800000
+					},
+					"resave": true,
+					"saveUninitialized": true,
+					"proxy": null
+				}]
+			}
+		},
+
+		"switchOption": {
+			"enabled": true,
+			"priority": 120,
+			"module": {
+				"arguments": [{}]
+			}
+		},
+
+		"serverError": {
+			"enabled": false
+		}
+	}
+}

@@ -1,0 +1,101 @@
+.footer {
+  background-color: #444;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.footer .container .contact {
+  margin: 60px 30px;
+}
+.footer .container .contact h1,
+.footer .container .contact h2,
+.footer .container .contact h3,
+.footer .container .contact h4,
+.footer .container .contact h5,
+.footer .container .contact h6 {
+  margin: 0;
+}
+.footer .container .contact > div {
+  vertical-align: top;
+  display: inline-block;
+}
+.footer .container .contact > div:not(:last-child) {
+  margin-right: 100px;
+}
+.footer .container .contact .title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff !important;
+}
+.footer .container .contact .title > a {
+  color: #fff !important;
+}
+.footer .container .contact .title > a > span {
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+}
+.footer .container .contact ul.list-inline {
+  margin-bottom: 20px;
+}
+.footer .container .contact ul.list-inline > li {
+  padding: 0;
+}
+.footer .container .contact ul.list-inline > li:first-child {
+  margin-right: 30px;
+}
+.footer .container .contact ul.list-inline > li > a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer .container .contact ul.list-inline > li > a:hover {
+  color: #fff;
+}
+.footer .container .contact ul.list-inline.join > li:first-child {
+  margin-right: 20px;
+}
+.footer .container .contact ul.list-inline.join > li > span {
+  vertical-align: middle;
+}
+.footer .container .contact ul.list-inline.join > li > a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer .container .contact ul.list-inline.join > li > a:hover {
+  color: #fff;
+}
+.footer .container .contact ul.list-inline.join > li > a > span {
+  vertical-align: middle;
+}
+.footer .container .contact ul.list-inline.join > li > a > img {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+}
+.footer .friend-link {
+  background-color: #353535;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+.footer .friend-link .container {
+  padding: 17px 24px;
+}
+.footer .friend-link .container > a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer .friend-link .container > a:hover {
+  color: #fff;
+}
+.footer .copyright > .container {
+  padding: 17px 0;
+  color: rgba(255, 255, 255, 0.4);
+}
+.footer .copyright > .container > a {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+.footer .copyright > .container > a:hover {
+  color: #fff !important;
+}
+.footer a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+}

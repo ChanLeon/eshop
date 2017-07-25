@@ -1,0 +1,32 @@
+#navigation {
+    color: #fff;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+.content {   
+    font-size: 18px;
+}
+#contact ul.dropdown-menu li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+#contact ul.dropdown-menu li:last-child {
+    border-bottom: 0;
+}
+.navbar-nav>li>a {
+    line-height: 25px;
+}
+.search {
+    position: relative;
+} 
+.search #search {
+    position: absolute;
+    top: 13px;
+    left: 0;
+}
+.search #searchInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+} 
