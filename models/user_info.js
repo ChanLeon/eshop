@@ -7,8 +7,9 @@ var eUserInfoModel = function(){
 	var eUserInfoSchema = mongoose.Schema({
 		user_id: String, //平台生成用户id
 		username: String, //用户姓名
-		passwd : String ,//来源 ，pc mobile
-		phone: String ,//
+		passwd : String ,//密码
+		gender: String, //性别
+		phone: String ,// 联系电话
 		qq: String,
 		email: String,
         regtime: String ,//注册时间

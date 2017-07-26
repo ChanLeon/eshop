@@ -12,25 +12,25 @@
 <style>
 	@media (min-width: 0px) {
 		.container {
-		    min-width: 1080px;
+		    min-width: 1180px;
 		}
 	}
 
 	@media (min-width: 1200px) {
 		.container {
-		    width: 1080px;
+		    width: 1180px;
 		}
 	}
 
 	@media (min-width: 992px) {
 		.container {
-		    width: 1080px;
+		    width: 1180px;
 		}
 	}
 
 	@media (min-width: 768px) {
 		.container {
-		    width: 1080px;
+		    width: 1180px;
 		}
 	}
 
@@ -65,12 +65,13 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<link href="/static/account/index_1151a90.css" rel="stylesheet">
-<link href="/static/common/css/header_568c338.css" rel="stylesheet">
-<link href="/static/common/css/footer_6c13149.css" rel="stylesheet">
+<link href="/static/account/index_a43549e.css" rel="stylesheet">
+<link href="/static/common/css/header_c803540.css" rel="stylesheet">
+<link href="/static/common/css/footer_492684a.css" rel="stylesheet">
 
         <!-- 
-            @require "account/static/index.js"
+			@require "common/static/lib/validator.js"
+			@require "account/static/index.js"
             @require "account/static/index.css"
         -->
 </head>
@@ -79,9 +80,10 @@ var _hmt = _hmt || [];
     @require "common/static/css/header.css"
     @require "common/static/js/header.js"
 -->
+<% var uInfo = locals.userInfo %>
 <div class="navbar navbar-inverse" id='navigation' role="navigation">
     <div class="navbar-inner">
-        <div class="container" style='margin-left: 0; margin-right: 0;'>  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
+        <div class="container">  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="javascript:void(0)">浩华潮流时装</a>
             </div>
@@ -95,17 +97,28 @@ var _hmt = _hmt || [];
                     <li id='contact' class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">联系客服<span class="glyphicon glyphicon-triangle-bottom"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">QQ号：12345678</a></li>
-                            <li><a href="#">微信号：12345678</a></li>
-                            <li><a href="#">联系方式：15989235164</a></li>
-                            <li><a href="#">电子邮箱：123456894@qq.com</a></li>
+                            <li><a href="javascript:void(0)">QQ号：12345678</a></li>
+                            <li><a href="javascript:void(0)">微信号：12345678</a></li>
+                            <li><a href="javascript:void(0)">联系方式：15989235164</a></li>
+                            <li><a href="javascript:void(0)">电子邮箱：123456894@qq.com</a></li>
                         </ul>
                     </li>
-                    <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
-                    <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
+                    <% if(uInfo) {%>
+                        <li id='logout' class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+                                 欢迎您，<ins><%= uInfo.username%><%=uInfo.gender != '保密' ? uInfo.gender == '男' ? '先生' : '女士' : ''%></ins><span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li style='margin:0;font-size:18px;'><a href="/account/logout">退出</a></li>
+                            </ul>
+                        </li>
+                    <%}else {%>
+                        <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
+                        <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
+                    <%}%>
                     <li class='search'> 
                         <input name="search" type="text" id="search" placeholder="查询">                       
-                        <a id='searchInput' class='glyphicon glyphicon-search' href=""></a>
+                        <a id='searchInput' class='glyphicon glyphicon-search' href="javascript:void(0)"></a>
                     </li>
                 </ul>
             </div>
@@ -118,19 +131,54 @@ var _hmt = _hmt || [];
 				<div class='panel-heading'>
 					<h2>请注册</h2>
 				</div>
-				<div class='panel-body' style='margin: 70px 30px 70px 30px;'>
+				<div class='panel-body' style='margin: 50px 30px 70px 30px;'>
 					<div class='text-left col-xs-6'>
-						<form action="/account/login" method="post" id="form">
+						<form action="/account/register" method="post" id="reg">
 							<div class="form-group">
-								<label for="username">用户名：</label>
-								<input type="text" class="form-control user" name="user" placeholder="请选择用户名">
+								<label for="username">*&nbsp;用户名：</label>
+								<input type="text" class="form-control username" name="username" id='username' placeholder="用户名">
 							</div>
 							<div class="form-group">
-								<label for="password">密码：</label>
-								<input type="password" name="password" class="form-control pass" placeholder="请填写密码">
+								<label for="passwd">*&nbsp;密码：</label>
+								<input type="password" name="passwd" class="form-control passwd" id='passwd' placeholder="密码*">
 							</div>
-							<input type="hidden" name="_csrf" value="<%-locals._csrf%>">
-							<button class="btn btn-default log">注册</button>
+							<div class="form-group">
+								<label for="rePasswd">*&nbsp;确认密码：</label>
+								<input type="password" name="rePasswd" class="form-control rePasswd" id='rePasswd' placeholder="确认密码*">
+							</div>
+							<div class="form-group" style='padding:15px 0 20px 0;'>
+								<div class='col-xs-3' style='padding-left:0;padding-right:0;'>
+									<label for="gender">*&nbsp;性别：</label>
+								</div>
+								<div class='col-xs-3'>
+									<input type="radio" value="男" name="gender" class='gender'/> &nbsp;&nbsp;男
+								</div>
+								<div class='col-xs-3'>
+									<input type="radio" value="女" name="gender" class='gender' checked/>&nbsp;&nbsp;女
+								</div>
+								<div class='col-xs-3' style='padding-left:0;padding-right:0;'>
+									<input type="radio" value="保密" name="gender" class='gender'/>&nbsp;&nbsp;性别不重要
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="phone">*&nbsp;留电话?：</label>
+								<input type="text" name="phone" class="form-control phone" placeholder="电话">
+							</div>
+							<div class="form-group">
+								<label for="qq">*&nbsp;或QQ？：</label>
+								<input type="text" name="qq" class="form-control qq" placeholder="扣扣">
+							</div>
+							<div class="form-group" id='email'>
+								<label for="email">*&nbsp;要不邮箱？：</label>
+								<input type="text" name="email" class="form-control email" placeholder="邮箱">
+							</div>
+							<div class="text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
+								<span class='errInfo'></span>
+							</div>
+							<div class='form-group text-center'>
+								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">						
+								<button type='button' class="btn btn-success register" style='color:#fff;padding:8px 20px;'>立即注册</button>
+							</div>
 						</form>
 					</div>
 					<div class='text-right col-xs-6'>
@@ -139,7 +187,12 @@ var _hmt = _hmt || [];
 				</div>
 			</div>
 			<div>
-				<button type='button' class="btn btn-danger" style='color:#fff;padding:8px 20px;margin-left:15px;'>取消</button>
+				<div class='col-xs-6'>
+					<button type='button' class="btn btn-danger cancel" style='color:#fff;padding:8px 20px;margin-left:15px;'>取消</button>
+				</div>
+				<div class='col-xs-6 text-right style='line-height:38px;'>
+					<span>如果您遇到问题，欢迎随时提问：<b class='glyphicon glyphicon-earphone'></b>15989123456</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -147,69 +200,30 @@ var _hmt = _hmt || [];
     @require "common/static/css/footer.css"
 -->
 <div class="footer">
-    <div class="container" style="padding: 0;">                
-        <div class="row contact">
-            <div>
-                <h4 class="title"><a href="/other/index"><span>关于</span>我们</a></h4>
-                <ul class="list-inline">
-                    <li><a href="/other/?type=1">公司简介</a></li>
-                    <li><a href="/other/?type=1#groups">管理团队</a></li>
-                </ul>
-                <ul class="list-inline">
-                    <li style="margin-right: 16px;"><a href="/other/?type=38">派派猪乐园</a></li>
-                    <li><a href="/other/?type=2">人才招聘</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="title"><a href="/doc/help"><span>帮助</span>中心</a></h4>
-                <ul class="list-inline">
-                    <li><a href="/doc/xszn" target="_blank">新手指南</a></li>
-                    <li><a href="/doc/help#questions">常见问题</a></li>
-                </ul>
-                <ul class="list-inline">
-                    <li><a href="/doc/aqbz" target="_blank">风险控制</a></li>
-                </ul>
-            </div>
-
-            <div style="margin-right: 48px;">
-                <h4 class="title">客服热线</h4>
-                <h1 style="font-size: 16px; margin-bottom: 6px;">4000-689-360</h1>
-                <h3 style="margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.6);">(8:30~18:00)</h3>
-                <ul class="list-inline join">
-                    <li>
-                        <a rel="nofollow" href="https://weibo.com/5371061117/profile"><span>关注微博</span><img src="/static/common/image/ico_weibo__b88851a.png"></a>
-                    </li>
-                    <li>
-                        <a rel="nofollow" href="https://shang.qq.com/wpa/qunwpa?idkey=9282c8eca70dded38999d60812fb62e91b4d4ae02cb5442948b97175a0d5721c"><span>加入&nbsp;Q&nbsp;群</span><img src="/static/common/image/ico_qq__e008ea7.png"></a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <img src="/static/common/image/QR_Code__3c27e66.png" class="img-responsive">
-            </div>
-        </div>
-    </div>
-    <div class="friend-link">
-        <div class="container">
-            友情链接：
-            <a rel="nofollow" href="http://www.wangdaizhijia.com" target="_blank">网贷之家</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a rel="nofollow" href="http://www.p2peye.com" target="_blank">网贷天眼</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a rel="nofollow" href="http://www.51wangdai.com/" target="_blank">51网贷</a>
-        </div>
+    <div style="text-center">
+        <h4 class="title">客服热线</h4>
+        <h1 style="font-size: 16px; margin-bottom: 6px;">4000-689-360</h1>
+        <h3 style="margin-bottom: 15px; font-size: 14px; color: rgba(255,255,255,0.6);">(8:30~18:00)</h3>
+        <ul class="list-inline join">
+            <li>
+                <a rel="nofollow" href="https://weibo.com/5371061117/profile"><span>关注微博</span><img src="../static/image/ico_weibo.png"></a>
+            </li>
+            <li>
+                <a rel="nofollow" href="https://shang.qq.com/wpa/qunwpa?idkey=9282c8eca70dded38999d60812fb62e91b4d4ae02cb5442948b97175a0d5721c"><span>加入&nbsp;Q&nbsp;群</span><img src="../static/image/ico_qq.png"></a>
+            </li>
+        </ul>
     </div>
     <div class="copyright text-center">
         <div class="container">
-            &copy; 2014 广州易票宝互联网金融信息服务有限公司 版权所有. <a rel="nofollow" href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备 14073354-2 号</a>
-            <p style="margin-top: 16px; margin-bottom: 0;">理财有风险 投资须谨慎</p>
+            &copy; 2017 浩华潮流时装工作室 版权所有. <a rel="nofollow" href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备 17042595号</a>
         </div>
     </div>
 </div>
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> 
-<script src="/static/account/index_6da3651.js"></script>
-<script src="/static/common/js/header_0beeb39.js"></script>
+<script src="/static/common/lib/validator_b10db59.js"></script>
+<script src="/static/account/index_de75a15.js"></script>
+<script src="/static/common/js/header_6578a2d.js"></script>
 
 </body>
 </html>
