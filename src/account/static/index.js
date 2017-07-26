@@ -19,7 +19,7 @@ $(document).ready(function(){
             'username': ['notEmpty', '用户名不能为空'],
             'passwd': ['is', '登录密码应为6-18位', '^\\S{6,18}$'],
             'rePasswd': ['value_eq', '两次输入的密码不一致', 'passwd'],
-            'gender': ['notEmpty', '性别不能为空'],
+            'gender': ['notEmpty', '性别不能为空']
         }, false, function(info){
             if(info) {
                 $('.errInfo').text('*' + info);

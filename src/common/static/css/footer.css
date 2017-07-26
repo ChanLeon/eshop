@@ -1,7 +1,22 @@
 .footer {
   padding:15px 0;
   background-color: #444;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.4);
+}
+.footer .top {
+	width:100%;
+	margin:10px auto;
+	display:table;
+}
+.footer .top div {
+	display:table-cell;
+	vertical-align:middle;
+}
+.footer .top div.dian {
+	margin:15px auto;
+}
+.footer .copyright {
+	background-color:#353535;
 }
 .footer .copyright > .container {
   padding: 17px 0;

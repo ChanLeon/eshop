@@ -32,14 +32,14 @@
             "type": "css"
         },
         "account/static/index.js": {
-            "uri": "/static/account/index_de75a15.js",
+            "uri": "/static/account/index_576c508.js",
             "type": "js",
             "deps": [
                 "account/static/index.css"
             ]
         },
         "common/static/css/footer.css": {
-            "uri": "/static/common/css/footer_492684a.css",
+            "uri": "/static/common/css/footer_02ce274.css",
             "type": "css"
         },
         "common/static/css/header.css": {
