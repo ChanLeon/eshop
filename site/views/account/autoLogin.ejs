@@ -1,0 +1,6 @@
+<form id="form" action="/account/login" method="POST">
+	<input type="hidden" name="username" value="<%= locals.username %>" />
+	<input type="hidden" name="passwd" value="<%= locals.passwd %>">
+	<input type="hidden" name="_csrf" value="<%- _csrf %>">
+</form>
+<script language='JavaScript'>document.getElementById('form').submit();</script>

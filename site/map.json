@@ -1,5 +1,9 @@
 {
     "res": {
+        "account/page/autoLogin.ejs": {
+            "uri": "/views/account/autoLogin.ejs",
+            "type": "ejs"
+        },
         "account/page/login.ejs": {
             "uri": "/views/account/login.ejs",
             "type": "ejs",
@@ -15,6 +19,7 @@
             "uri": "/views/account/register.ejs",
             "type": "ejs",
             "deps": [
+                "common/static/lib/validator.js",
                 "account/static/index.js",
                 "account/static/index.css",
                 "common/static/css/header.css",
@@ -23,22 +28,22 @@
             ]
         },
         "account/static/index.css": {
-            "uri": "/static/account/index_1151a90.css",
+            "uri": "/static/account/index_a43549e.css",
             "type": "css"
         },
         "account/static/index.js": {
-            "uri": "/static/account/index_6da3651.js",
+            "uri": "/static/account/index_de75a15.js",
             "type": "js",
             "deps": [
                 "account/static/index.css"
             ]
         },
         "common/static/css/footer.css": {
-            "uri": "/static/common/css/footer_6c13149.css",
+            "uri": "/static/common/css/footer_492684a.css",
             "type": "css"
         },
         "common/static/css/header.css": {
-            "uri": "/static/common/css/header_568c338.css",
+            "uri": "/static/common/css/header_c803540.css",
             "type": "css"
         },
         "common/static/js/footer.js": {
@@ -46,7 +51,7 @@
             "type": "js"
         },
         "common/static/js/header.js": {
-            "uri": "/static/common/js/header_0beeb39.js",
+            "uri": "/static/common/js/header_6578a2d.js",
             "type": "js"
         },
         "common/static/lib/bootstrap.min.css": {
@@ -59,6 +64,10 @@
             "deps": [
                 "common/static/lib/bootstrap.min.css"
             ]
+        },
+        "common/static/lib/countdown.js": {
+            "uri": "/static/common/lib/countdown_30ab5e2.js",
+            "type": "js"
         },
         "common/static/lib/dataTablePlugin.js": {
             "uri": "/static/common/lib/dataTablePlugin_650a0c7.js",
@@ -107,15 +116,11 @@
             "uri": "/static/common/lib/validator_b10db59.js",
             "type": "js"
         },
-        "contact/page/index.ejs": {
-            "uri": "/views/contact/index.ejs",
+        "contact/page/rs.ejs": {
+            "uri": "/views/contact/rs.ejs",
             "type": "ejs",
             "deps": [
-                "contact/static/index.js",
-                "contact/static/index.css",
-                "common/static/css/header.css",
-                "common/static/js/header.js",
-                "common/static/css/footer.css"
+                "common/static/lib/countdown.js"
             ]
         },
         "contact/static/index.css": {
