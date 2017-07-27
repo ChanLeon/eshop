@@ -1,3 +1,5 @@
+let auth = require('../../lib/auth').auth;
+
 module.exports = function(router) {
     router.get('/womenCloth', auth, function(req, res) {
         res.render('product/womenCloth',{

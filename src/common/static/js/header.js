@@ -5,10 +5,13 @@ $(document).ready(function(){
     let $brand = $('#brand_url');
     $contact.hover(function(){
         $(this).find('span').attr('class', 'glyphicon glyphicon-triangle-top');
-        $(this).find('.dropdown-menu').css('display','block');
+        // $(this).find('.dropdown-menu').css('display','block');
+        $(this).find('.dropdown-menu').slideDown(500);
     },function(){
         $(this).find('span').attr('class', 'glyphicon glyphicon-triangle-bottom');
-        $(this).find('.dropdown-menu').css('display','none');
+        $(this).find('.dropdown-menu').slideUp(500, function (){
+            $(this).css('display','none');
+        })        
     })
 
     $brand.on('click', function(){
@@ -16,7 +19,7 @@ $(document).ready(function(){
     })
 
     $contact.on('click',function(){
-        $(this).find('.dropdown-menu').css('display', 'none');
+        $(this).find('.dropdown-menu').css('display', 'block');
     })
 
     $logOut.hover(function(){

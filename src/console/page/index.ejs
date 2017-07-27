@@ -13,39 +13,35 @@
 		<div class="col-xs-12">
 			<div class="panel">
 				<div class='panel-heading'>
-					<h2>上传图片信息并更新信息</h2>
+					<h2>更新图片信息</h2>
 				</div>
 				<div class='panel-body' style='margin: 70px 30px 70px 30px;'>
 					<div class='text-left col-xs-6'>
-						<form action="/console/admin/upload" method="post" id="login">
+						<form action="/console/admin/upload" method="post" id="upload">
 							<div class="form-group">
-								<label for="username">用户名：</label>
-								<input type="text" class="form-control username" name="username" id='username' placeholder="用户名">
+								<label for="picUrl">图片路径：</label>
+								<input type="text" class="form-control picUrl" name="picUrl" id='picUrl' placeholder="填写图片路径">
 							</div>
 							<div class="form-group">
-								<label for="passwd">密码：</label>
-								<input type="password" name="passwd" class="form-control passwd" id='passwd' placeholder="密码*">
+								<label for="picName">商品名字：</label>
+								<input type="text" name="picName" class="form-control picName" id='picName' placeholder="填写商品名称">
+							</div>
+							<div class="form-group">
+								<label for="picPrice">商品价格：</label>
+								<input type="text" name="picPrice" class="form-control picPrice" id='picPrice' placeholder="填写商品价格">
 							</div>
 							<div class="text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
 								<span class='errInfo'></span>
 							</div>
 							<div class='form-group text-center'>
-								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">							
-								<button type='button' class="btn btn-success login" style='color:#fff;padding:8px 20px;'>登录</button>
+								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">			
+								<button type='button' class="btn btn-success upload" style='color:#fff;padding:8px 20px;'>更新信息</button>
 							</div>
 						</form>
 					</div>
 					<div class='text-right col-xs-6'>
-						<img src='../static/image/login.png' class='img-responsive center-block'>
+						<img src='../../account/static/image/login.png' class='img-responsive center-block'>
 					</div>
-				</div>
-			</div>
-			<div>
-				<div class='col-xs-6'>
-					<button type='button' class="btn btn-danger cancel" style='color:#fff;padding:8px 20px;margin-left:15px;'>取消</button>
-				</div>
-				<div class='col-xs-6 text-right style='line-height:38px;'>
-					<span>如果您遇到问题，欢迎随时提问：<b class='glyphicon glyphicon-earphone'></b>15989123456</span>
 				</div>
 			</div>
 		</div>

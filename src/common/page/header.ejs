@@ -6,7 +6,7 @@
 <div class="navbar navbar-inverse" id='navigation' role="navigation">
     <div class="navbar-inner">
         <div class="container">  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
-            <div class="navbar-header" id='brand_url'>
+            <div class="navbar-header" id='brand_url' style='cursor:pointer;'>
                 <a class="navbar-brand">浩华潮流时装</a>
             </div>
             <div class="content" style='width: 100%;margin-left: 20%;'>
@@ -21,13 +21,13 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="https://shop506028910.taobao.com/?spm=a230r.7195193.1997079397.56.XdptFD" target='_blank'>
-                                    <ins>淘宝店铺：小柒 海外购</ins>
+                                    淘宝店铺：<ins>小柒 海外购</ins>
                                 </a>
                             </li>
-                            <li><a href="javascript:void(0)">QQ号：12345678</a></li>
-                            <li><a href="javascript:void(0)">微信号：12345678</a></li>
-                            <li><a href="javascript:void(0)">联系方式：15989235164</a></li>
-                            <li><a href="javascript:void(0)">电子邮箱：123456894@qq.com</a></li>
+                            <li><a>QQ号：12345678</a></li>
+                            <li><a>微信号：12345678</a></li>
+                            <li><a>联系方式：15989235164</a></li>
+                            <li><a>电子邮箱：123456894@qq.com</a></li>
                         </ul>
                     </li>
                     <% if(uInfo) {%>
@@ -43,7 +43,12 @@
                         <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
                         <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
                     <%}%>
-                    <li <% if (locals.console == 'console') {%> class="active" <%}%>><a href="/console/login">管理员</a></li>
+                    <%if(uInfo && uInfo.username == 'zhihaoadmin'){%>
+                        <li <% if (locals.console == 'console') {%> class="active" <%}%>><a href="/console/admin/upload">管理员</a></li>
+                    <%}%>
+                        <!-- <li class='set'>
+                            <a href="/set/index">设置<span class='glyphicon glyphicon-cog'></span></a>
+                        </li> -->
                     <!-- <li class='search'> 
                         <input name="search" type="text" id="search" placeholder="查询">                       
                         <a id='searchInput' class='glyphicon glyphicon-search' href="javascript:void(0)"></a>
