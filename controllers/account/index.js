@@ -5,6 +5,7 @@ let moment = require('moment');
 let cipher = require('util-cipher');
 let async = require('async');
 let userInfo = require('../../models/user_info');
+let auth = require('../../lib/auth');
 
 module.exports = function(router) {
     router.get('/auto_login', function(req, res, next){
@@ -15,7 +16,7 @@ module.exports = function(router) {
 		})
     })
     
-    router.get('/login', function(req, res) {
+    router.get('/login', auth, function(req, res) {
         res.render('account/login', {
             login: 'login'
         });
@@ -49,7 +50,9 @@ module.exports = function(router) {
                 }else{
                     req.session.info = result;
                     res.locals.userInfo = req.session.info;
-                    res.render('home/index');
+                    res.render('home/index', {
+                        index: 'index'
+                    });
                 }                
             }            
         })
@@ -61,7 +64,7 @@ module.exports = function(router) {
 		res.redirect('/');
     })
 
-    router.get('/register', function(req, res) {
+    router.get('/register', auth, function(req, res) {
         res.render('account/register', {
             reg: 'reg'
         });
@@ -134,11 +137,6 @@ module.exports = function(router) {
                     res.redirect('/contact/rs/success/register?err=' + encodeURIComponent('注册成功') + '&cb=' + encodeURIComponent('/account/auto_login'));
                 }
             }
-        })
-
-        
-        
-       
-        
+        })   
     })
 }

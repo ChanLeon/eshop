@@ -6,8 +6,8 @@
 <div class="navbar navbar-inverse" id='navigation' role="navigation">
     <div class="navbar-inner">
         <div class="container">  <!-- 如果此处换成class="container"，那么导航栏内容就会居中。 -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="javascript:void(0)">浩华潮流时装</a>
+            <div class="navbar-header" id='brand_url'>
+                <a class="navbar-brand">浩华潮流时装</a>
             </div>
             <div class="content" style='width: 100%;margin-left: 20%;'>
                 <ul class="nav navbar-nav" style='width: 100%;'>
@@ -15,10 +15,15 @@
                     <li <% if (locals.womenCloth == 'womenCloth') {%> class="active" <%}%>><a href="/product/womenCloth">时尚女装</a></li>
                     <li <% if (locals.womenBag == 'womenBag') {%> class="active" <%}%>><a href="/product/womenBag">潮流女包</a></li>
                     <li <% if (locals.womenShoes == 'womenShoes') {%> class="active" <%}%>><a href="/product/womenShoes">前卫女鞋</a></li>
-                    <li <% if (locals.childCloth == 'childCloth') {%> class="active" <%}%>><a href="/product/childCloth">酷帅儿童装</a></li>
+                    <li <% if (locals.childCloth == 'childCloth') {%> class="active" <%}%>><a href="/product/childCloth">酷帅童装</a></li>
                     <li id='contact' class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">联系客服<span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"  style='background-color:transparent;' href='javascript:void(0)'>联系客服<span class="glyphicon glyphicon-triangle-bottom"></span></a>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://shop506028910.taobao.com/?spm=a230r.7195193.1997079397.56.XdptFD" target='_blank'>
+                                    <ins>淘宝店铺：小柒 海外购</ins>
+                                </a>
+                            </li>
                             <li><a href="javascript:void(0)">QQ号：12345678</a></li>
                             <li><a href="javascript:void(0)">微信号：12345678</a></li>
                             <li><a href="javascript:void(0)">联系方式：15989235164</a></li>
@@ -38,10 +43,11 @@
                         <li <% if (locals.login == 'login') {%> class="active" <%}%>><a href="/account/login">登录</a></li>
                         <li <% if (locals.reg == 'reg') {%> class="active" <%}%>><a href="/account/register">注册</a></li>
                     <%}%>
-                    <li class='search'> 
+                    <li <% if (locals.console == 'console') {%> class="active" <%}%>><a href="/console/login">管理员</a></li>
+                    <!-- <li class='search'> 
                         <input name="search" type="text" id="search" placeholder="查询">                       
                         <a id='searchInput' class='glyphicon glyphicon-search' href="javascript:void(0)"></a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

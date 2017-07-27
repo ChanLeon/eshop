@@ -1,7 +1,7 @@
 .footer {
   padding:15px 0;
   background-color: #444;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4); 
 }
 .footer .top {
 	width:100%;
@@ -12,11 +12,15 @@
 	display:table-cell;
 	vertical-align:middle;
 }
+.footer .top div span {
+  font-size:15px;
+}
 .footer .top div.dian {
 	margin:15px auto;
 }
 .footer .copyright {
-	background-color:#353535;
+  background-color:#353535;
+  font-size:15px;
 }
 .footer .copyright > .container {
   padding: 17px 0;
