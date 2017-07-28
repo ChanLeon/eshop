@@ -1,3 +1,4 @@
+'use strict';
 let auth = require('../../lib/auth').auth;
 
 module.exports = function(router) {

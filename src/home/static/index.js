@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('div.container .opa div.col-xs-4').hover(function(){
+    $('div.container .opa>div').hover(function(){
         $(this).css('position','relative');
         $(this).find('.opaModel').slideDown(300);
     },function(){

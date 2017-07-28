@@ -1,11 +1,12 @@
 #navigation {
     color: #fff;
 }
-.navbar-brand {
-    font-size: 24px;
-}
+
 .content {   
     font-size: 16px;
+}
+.navbar-brand {
+    font-size: 24px;
 }
 #contact ul.dropdown-menu li {
     border-bottom: 1px solid #eee;
@@ -21,7 +22,7 @@
 .navbar-nav>li>a {
     line-height: 25px;
 }
-.search {
+/* .search {
     position: relative;
 } 
 .search #search {
@@ -34,4 +35,4 @@
     position: absolute;
     top: 0;
     left: 185px;
-} 
+}  */

@@ -2,7 +2,7 @@ $(document).ready(function(){
     let $contact = $('#contact');
     let $search = $('.search');
     let $logOut = $('#logout');
-    let $brand = $('#brand_url');
+    let $brand = $('#brand_url>a');
     $contact.hover(function(){
         $(this).find('span').attr('class', 'glyphicon glyphicon-triangle-top');
         // $(this).find('.dropdown-menu').css('display','block');
