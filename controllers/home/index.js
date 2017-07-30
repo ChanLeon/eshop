@@ -20,6 +20,7 @@ module.exports = function(router) {
     				scrollArr.push(pic.picUrl.split('/eshop')[1]);
     			})
     			req.session.scrollArr = scrollArr;
+                req.session.scrollPicNum = scrollArr.length;
 		        res.render('home/index', {
 		            index: 'index',
 		            picOne: scrollArr[0],

@@ -40,7 +40,7 @@ module.exports = function(router) {
                 }else {
                     req.session.info = data;
                     res.locals.userInfo = req.session.info;
-                    res.redirect('/console/admin/upload');
+                    res.redirect('/home/index');
                 }
             })
         }else {

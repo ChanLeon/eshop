@@ -9,6 +9,7 @@ var ladyPicModel = function(){
 		picUrl: String, //图片url
 		picName: String, //图片名字
 		picPrice : String,//图片价格
+		picFlat: Number,  //上传的图片标识
 		picTime: String //上传图片的时间
 	});
 	return mongoose.model('lady_pic', ladyPicSchema,'lady_pic');

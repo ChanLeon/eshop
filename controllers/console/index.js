@@ -17,6 +17,7 @@ module.exports = function(router){
             res.locals.picTwo = scrollArr[1];
             res.locals.picThree = scrollArr[2];
             var picNumber = req.session.scrollPicNum;
+            console.log('picNumber', picNumber);
             res.render('console/index', {
                 console: 'console',
                 picNumber: picNumber
