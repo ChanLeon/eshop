@@ -14,9 +14,9 @@ $(document).ready(function(){
         window.location.href = '/home/index';
     })
 
-    $regSub.on('click', function(){
-        let confirmTrue = $regForm.validator({
-            'username': ['notEmpty', '用户名不能为空'],
+    $regForm.on('submit', function(e){
+        let confirmTrue = $(this).validator({
+            'username': ['isEmail', '请输入正确的邮箱地址'],
             'passwd': ['is', '登录密码应为6-18位', '^\\S{6,18}$'],
             'rePasswd': ['value_eq', '两次输入的密码不一致', 'passwd'],
             'gender': ['notEmpty', '性别不能为空']
@@ -30,33 +30,43 @@ $(document).ready(function(){
         if(confirmTrue) {
             let phoneVal = $.trim($phone.val());
             let qqVal = $.trim($qq.val());
-            let emailVal = $.trim($email.val());
-            if(phoneVal.length == 0 && qqVal.length == 0 && emailVal.length == 0){
+            if(phoneVal.length == 0 && qqVal.length == 0){
                 var str = '*亲，联系方式至少需要留一个';
                 $('.errInfo').text(str);
                 return false;
-            }else if(phoneVal.length != 0 || qqVal.length != 0 || emailVal.length != 0) {
+            }else if(phoneVal.length != 0 || qqVal.length != 0) {
                 var phoneTrue = /^1(4[0-9]|3[0-9]|5[0-35-9]|7[06-8]|8[0-9])\d{8}$/.test(phoneVal);
-                var emailTrue = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(emailVal);
                 var qqTrue = /^\d{5,15}$/.test(qqVal);
-                if(phoneTrue || emailTrue || qqTrue){
-                    $regForm.submit();
+                if(phoneTrue || qqTrue){
+                    return true;
                 }else{
                     var str = '*亲，您输入的格式不正确';
                     $('.errInfo').text(str);
                     return false;
                 } 
             }
+        }else {
+            e.preventDefault();
         }
     })
 
-    $loginSub.on('click', function(){
+    // $loginSub.on('click', function(){
+    //     if($.trim($userName.val()).length == 0 || $.trim($passWord.val()).length == 0) {
+    //         var str = '*亲，用户名或密码不能为空';
+    //         $('.errInfo').text(str);
+    //         return false;
+    //     }else {
+    //         $loginForm.submit();
+    //     }
+    // })
+
+    $loginForm.on('submit', function(e){
         if($.trim($userName.val()).length == 0 || $.trim($passWord.val()).length == 0) {
             var str = '*亲，用户名或密码不能为空';
             $('.errInfo').text(str);
             return false;
         }else {
-            $loginForm.submit();
+            return true;
         }
     })
     

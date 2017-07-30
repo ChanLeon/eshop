@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           env: {
             'NODE_ENV': 'development'
           },
-          command: 'm,D,l,p' //m: md5, D: domains, l: lint, o: optimize, p: pack
+          command: 'D,l,p' //m: md5, D: domains, l: lint, o: optimize, p: pack
         }
       },
       deploy: {

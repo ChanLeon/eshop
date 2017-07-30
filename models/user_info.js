@@ -11,7 +11,6 @@ var eUserInfoModel = function(){
 		gender: String, //性别
 		phone: String ,// 联系电话
 		qq: String,
-		email: String,
         regtime: String ,//注册时间
         login_time: String //登录时间
 	});

@@ -3,7 +3,7 @@ body {
     margin: 0;
     background-color: #fff;
 }
-.banner .b-img a.one {
+/*.banner .b-img a.one {
   background:url('./image/pic_scroll/banOne.jpg') center no-repeat;
 }
 .banner .b-img a.second {
@@ -11,7 +11,7 @@ body {
 }
 .banner .b-img a.three {
   background:url('./image/pic_scroll/banThree.jpg') center no-repeat;
-}
+}*/
 div.banner {
   position:relative;
 }

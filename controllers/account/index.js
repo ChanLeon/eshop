@@ -40,9 +40,7 @@ module.exports = function(router) {
                 }else {
                     req.session.info = data;
                     res.locals.userInfo = req.session.info;
-                    res.render('console/index', {
-                        console: 'console'
-                    });
+                    res.redirect('/console/admin/upload');
                 }
             })
         }else {
@@ -72,9 +70,7 @@ module.exports = function(router) {
                     }else{
                         req.session.info = result;
                         res.locals.userInfo = req.session.info;
-                        res.render('home/index', {
-                            index: 'index'
-                        });
+                        res.redirect('/home/index');
                     }                
                 }            
             })

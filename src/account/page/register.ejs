@@ -21,7 +21,7 @@
 						<form action="/account/register" method="post" id="reg">
 							<div class="form-group">
 								<label for="username">*&nbsp;用户名：</label>
-								<input type="text" class="form-control username" name="username" id='username' placeholder="用户名">
+								<input type="text" class="form-control username" name="username" id='username' placeholder="请输入邮箱">
 							</div>
 							<div class="form-group">
 								<label for="passwd">*&nbsp;密码：</label>
@@ -53,20 +53,16 @@
 								<label for="qq">*&nbsp;或QQ？：</label>
 								<input type="text" name="qq" class="form-control qq" placeholder="扣扣">
 							</div>
-							<div class="form-group" id='email'>
-								<label for="email">*&nbsp;要不邮箱？：</label>
-								<input type="text" name="email" class="form-control email" placeholder="邮箱">
-							</div>
 							<div class="text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
 								<span class='errInfo'></span>
 							</div>
 							<div class='form-group text-center'>
 								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">						
-								<button type='button' class="btn btn-success register" style='color:#fff;padding:8px 20px;'>立即注册</button>
+								<button type='submit' class="btn btn-success register" style='color:#fff;padding:8px 20px;'>立即注册</button>
 							</div>
 						</form>
 					</div>
-					<div class='text-right col-xs-6' style='margin:40px 0'>
+					<div class='text-right col-xs-6' style='margin:0'>
 						<img src='../static/image/reg.png' class='img-responsive center-block'>
 					</div>
 				</div>
