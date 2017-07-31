@@ -19,6 +19,21 @@ body {
 	background-color:transparent;
 	border-bottom:1px solid #ddd;
 }
+.panel .panel-body ul a {
+	 border-color:#b4c4d2;  
+	 color:#000;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	 background-color:#0c3c67;
+	 color:#fff;
+}
+
+.panel .panel-body #myTabContent #clothes,#bags,#shoes {
+	margin:50px 0 30px 0;
+}
+ .panel .panel-body #clothTabContent,#bagsTabContent,#shoesTabContent {
+	 margin:50px 0 30px 0;
+ }  
 .panel .panel-body form label {
 	font-size:20px;
 	color: #333;

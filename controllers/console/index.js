@@ -23,26 +23,29 @@ module.exports = function(router){
                 picNumber: picNumber
             });
         }else {
-            res.render('contact/rs', {
-                            err: '请先登录',
-                            cb: '/account/login'
-                        });
+            // res.render('contact/rs', {
+            //     err: '请先登录',
+            //     cb: '/account/login'
+            // });
+            res.render('console/index');
         }
     })
 
     router.post('/admin/upload', function(req, res) {
-        var thePath = req.body.scrollPic == 'scroll' || 'create' ? '../../upload/scroll' : '';        
+        var thePath = req.body.scrollPic == 'scroll' || 'create' ? '../../public/scroll' : '';        
         console.log('pic cond', thePath);
         var picCond = req.body;
-    	var picTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        var picTime = moment().format('YYYY-MM-DD HH:mm:ss');
         if(req.files.file && req.files.file.name) {
             try {
                 var temName = req.files.file.name;
                 var temPath = req.files.file.path;
                 var picPath = path.join(__dirname, thePath);
+                console.log('picPath====1', picPath);
                 if(!fs.existsSync(picPath)) {
                     fs.mkdirSync(picPath);
                 }
+                console.log('picPath====2', picPath);
                 var targetPath = path.join(picPath, temName);
                 var readStream = fs.createReadStream(temPath);
                 var writeStream = fs.createWriteStream(targetPath);

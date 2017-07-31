@@ -8,6 +8,8 @@ $(document).ready(function(){
     let $createPicSub = $createPicForm.find('.createPic');
     let $createInfo = $createPicForm.find('#file');
 
+    const $myTab = $('#myTab');
+
     $createPicInfo.on('click', function() {
         $('#pic_modal').modal('show');
     })
@@ -32,7 +34,7 @@ $(document).ready(function(){
             var str = '请选择需要上传的图片，否则不能更新';
             $('.errInfo').text(str);
             return false;
-        }else if($picInfo.val() && !/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test($picInfo.val())){
+        }else if($picInfo.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($picInfo.val())){
             var str = '请选择图片格式文件上传';
             $('.errInfo').text(str);
             return false;

@@ -17,9 +17,10 @@ module.exports = function(router) {
     		}else {
     			logger.info('result', result);
     			result.forEach(function(pic) {
-    				scrollArr.push(pic.picUrl.split('/eshop')[1]);
+    				scrollArr.push(pic.picUrl.split('/eshop/public')[1]);
     			})
-    			req.session.scrollArr = scrollArr;
+				req.session.scrollArr = scrollArr;
+				logger.info('req.session.scrollArr', req.session.scrollArr);
                 req.session.scrollPicNum = scrollArr.length;
 		        res.render('home/index', {
 		            index: 'index',
