@@ -1,0 +1,111 @@
+<div class='text-center col-xs-12 tab-pane fade' id='clothes'>
+    <ul id="clothTab" class="nav nav-tabs" style='border:0;margin:0 auto;padding:0;'>
+        <li class="active col-xs-4 text-center">
+            <a class='' href='#clothAdd' data-toggle="tab" style='font-size:18px;'>增加女装</a>
+        </li>
+        <li class='col-xs-4 text-center'>
+            <a class='' href="#clothEdit" data-toggle="tab" style='font-size:18px;'>编辑女装</a>
+        </li>
+        <li class="col-xs-4 text-center">
+            <a class='' href='#clothDel' data-toggle="tab" style='font-size:18px;'>删除女装</a>
+        </li>
+    </ul>
+    <div id="clothTabContent" class="tab-content">
+        <div class='text-center col-xs-12 tab-pane fade in active' id='clothAdd'>
+            <form enctype="multipart/form-data" method="post" action="/console/admin/upload" id="clothAdd_">
+                <div class="form-group">
+                    <label for="picName">商品名字：</label>
+                    <input type="text" name="picName" class="form-control picName" id='clothAddName' placeholder="填写商品名称">
+                </div>
+                <div class="form-group">
+                    <label for="picPrice">商品价格：</label>
+                    <input type="text" name="picPrice" class="form-control picPrice" id='clothAddPrice' placeholder="填写商品价格">
+                </div>
+                <div class="form-group text-center" style='padding:30px 0 0 0;'>
+                    <label for="flag">图片标识：</label>
+                    <input type='text' id='clothAddFlag' name='flag' class="form-control flag" placeholder="注意flag的值">
+                </div>
+                <div class="col-xs-12 form-group text-center" style='padding:0;'>
+                    <input class="btn btn-primary" type='file' id='clothAddFile' name='file' style='margin:50px auto 0;'>
+                </div>
+                <div class="col-xs-12 text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
+                    <span class='errInfo'></span>
+                </div>
+                <div class='col-xs-12 form-group text-center'>
+                    <input type="hidden" name="_csrf" value="<%-locals._csrf%>">		
+                    <input type='hidden' name='scrollPic' value='clothAdd'>
+                    <button type='button' class="btn btn-success clothAdd_" style='color:#fff;padding:8px 20px;'>增加商品</button>
+                </div>
+            </form>
+        </div>
+        <div class='text-center col-xs-12 tab-pane fade' id='clothEdit'>
+            <form enctype="multipart/form-data" method="post" action="/console/admin/upload" id="clothEdit_"> 
+                <div class="form-group" style='padding:15px 0 20px 0;'>
+                    <div class='col-xs-12'>
+                        <label for="scrollBan">选择需要被编辑的商品：</label>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="0" name="flag" class='flag' checked/> 
+                        <img class='img-responsive center-block' src='<%= locals.picOne%>'>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="1" name="flag" class='flag'/>
+                        <img class='img-responsive center-block' src='<%= locals.picTwo%>'>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="2" name="flag" class='flag'/>
+                        <img class='img-responsive center-block' src='<%= locals.picThree%>'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="picName">商品名字：</label>
+                    <input type="text" name="picName" class="form-control picName" id='clothEditName' placeholder="填写商品名称">
+                </div>
+                <div class="form-group">
+                    <label for="picPrice">商品价格：</label>
+                    <input type="text" name="picPrice" class="form-control picPrice" id='clothEditPrice' placeholder="填写商品价格">
+                </div>
+                <div class="col-xs-12 form-group text-center" style='padding:0;'>
+                    <input class="btn btn-primary" type='file' id='clothEditFile' name='file' style='margin:50px auto 0;'>
+                </div>
+                <div class="col-xs-12 text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
+                    <span class='errInfo'></span>
+                </div>
+                <div class='col-xs-12 form-group text-center'>
+                    <input type="hidden" name="_csrf" value="<%-locals._csrf%>">		
+                    <input type='hidden' name='scrollPic' value='clothEdit'>
+                    <button type='button' class="btn btn-success clothEdit_" style='color:#fff;padding:8px 20px;'>编辑商品</button>
+                </div>
+            </form>
+        </div>
+        <div class='text-center col-xs-12 tab-pane fade' id='clothDel'>
+            <form enctype="multipart/form-data" method="post" action="/console/admin/upload" id="clothDel_">
+                <div class="form-group" style='padding:15px 0 20px 0;'>
+                    <div class='col-xs-12'>
+                        <label for="scrollBan">选择需要被删除的商品：</label>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="0" name="flag" class='flag' checked/> 
+                        <img class='img-responsive center-block' src='<%= locals.picOne%>'>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="1" name="flag" class='flag'/>
+                        <img class='img-responsive center-block' src='<%= locals.picTwo%>'>
+                    </div>
+                    <div class='col-xs-4'>
+                        <input type="radio" value="2" name="flag" class='flag'/>
+                        <img class='img-responsive center-block' src='<%= locals.picThree%>'>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
+                    <span class='errInfo'></span>
+                </div>
+                <div class='col-xs-12 form-group text-center'>
+                    <input type="hidden" name="_csrf" value="<%-locals._csrf%>">		
+                    <input type='hidden' name='scrollPic' value='clothDel'>
+                    <button type='button' class="btn btn-success clothDel_" style='color:#fff;padding:8px 20px;'>删除商品</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

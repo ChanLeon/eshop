@@ -8,6 +8,9 @@ let path = require('path');
 let async = require('async');
 let auth = require('../../lib/auth').auth;
 let picInfo = require('../../models/scroll_pic');
+let ladyPic = require('../../models/lady_pic');
+let bagsPic = require('../../models/bags');
+let shoesPic = require('../../models/shoes');
 
 module.exports = function(router){
     router.get('/admin/upload', auth, function(req, res) {
@@ -23,18 +26,29 @@ module.exports = function(router){
                 picNumber: picNumber
             });
         }else {
-            // res.render('contact/rs', {
-            //     err: '请先登录',
-            //     cb: '/account/login'
-            // });
-            res.render('console/index');
+            res.render('contact/rs', {
+                err: '请先登录',
+                cb: '/account/login'
+            });
+            // res.render('console/index');
         }
     })
 
     router.post('/admin/upload', function(req, res) {
-        var thePath = req.body.scrollPic == 'scroll' || 'create' ? '../../public/scroll' : '';        
-        console.log('pic cond', thePath);
+
+        // switch(req.body.scrollPic){
+        //     case 'scroll':
+        //     case 'create':
+        //       thePath = '../../public/scroll';
+        //       break;
+            
+        // }
+
+        var thePath = ['scroll', 'create'].indexOf(req.body.scrollPic) > -1 && '../../public/scroll' || ['clothAdd' , 'clothEdit' , 'clothDel'].indexOf(req.body.scrollPic) > -1 && '../../public/clothes' || ['bagsAdd','bagsEdit','bagsDel'].indexOf(req.body.scrollPic) > -1 && '../../public/bags' || '../../public/shoes'
+
+        console.log('thePath', thePath);
         var picCond = req.body;
+        console.log('pic cond', picCond);
         var picTime = moment().format('YYYY-MM-DD HH:mm:ss');
         if(req.files.file && req.files.file.name) {
             try {
@@ -52,18 +66,29 @@ module.exports = function(router){
                 readStream.pipe(writeStream);
                 readStream.on('end', function(){
                     fs.unlinkSync(temPath);
-                    var condition = {
-                        picId: cipher.md5['+'](picCond.picUrl + picTime),
-                        picUrl: targetPath,
-                        picFlat: parseInt(picCond.flag),
-                        picTime: picTime
+                    if(picCond.scrollPic == 'create' || picCond.scrollPic == 'scroll'){
+                        var condition = {
+                            picId: cipher.md5['+'](picCond.picUrl + picTime),
+                            picUrl: targetPath,
+                            picFlat: parseInt(picCond.flag),
+                            picTime: picTime
+                        }
+                    }else {
+                        var cond = {
+                            picId: cipher.md5['+'](picCond.picUrl + picTime),
+                            picUrl: targetPath,
+                            picName: picCond.picName, 
+                            picPrice : picCond.picPrice,
+                            picFlat: parseInt(picCond.flag),
+                            picTime: picTime
+                        }
                     }
                     if(picCond.scrollPic == 'create') {
                         picInfo.create(condition, function(err, result){
                             if(err){
-                               logger.info('创建数据库出错', err);
+                               logger.info('创建滚动图片数据库出错', err);
                                 res.render('contact/rs', {
-                                    err: '创建数据库出错',
+                                    err: '创建滚动图片数据库出错',
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
@@ -104,8 +129,20 @@ module.exports = function(router){
                                 res.redirect('/home/index')
                             }                
                         }) 
-                    }
-                    
+                    }else if(picCond.scrollPic == 'clothAdd') {
+                        ladyPic.create(cond, function(err, clothResult){
+                            if(err){
+                               logger.info('创建女装数据库出错', err);
+                                res.render('contact/rs', {
+                                    err: '创建女装数据库出错',
+                                    cb: '/console/admin/upload'
+                                }); 
+                            }else {
+                                logger.info('create clothResult==', clothResult);
+                                res.redirect('/console/admin/upload');                                                             
+                            }                
+                        })
+                    }                    
                 })
             }catch(e) {
                 logger.trace('导入图片出现错误', e);

@@ -1,0 +1,43 @@
+div.container .ladyClothes {
+  margin: 0;
+}
+div.container .ladyClothes>div {
+  margin:0 0 120px 0;
+}
+div.container div.opaModel {
+  display:none; 
+  width:92%;
+  height:60px;
+  background-color:#333;
+  opacity:0.8;
+  margin:0 0 0 15px;
+  position: absolute;
+  bottom:0;
+  left:0;
+  z-index:999;
+}
+div.container div.opaModel p {
+  color:#fff;
+  font-size:15px;
+  padding:0 0;
+  margin:0 0;
+}
+div.container div.opaModel p:first-child {
+  margin-top:10px;
+}
+
+div.container .ladyClothes div.buy {
+  width:100%;
+  position:absolute;
+  bottom:-60px;
+  left:0;
+}
+div.container .ladyClothes div.buy button{
+  font-size:16px;
+  border-radius:5px;
+  color: #333;
+  border-color: #6d6d6d;
+  background: #fff;
+  padding-left:30px;
+  padding-right:30px;
+}
