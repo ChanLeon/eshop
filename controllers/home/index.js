@@ -15,19 +15,30 @@ module.exports = function(router) {
                     cb: '/home/index'
                 });
     		}else {
-    			logger.info('result', result);
-    			result.forEach(function(pic) {
-    				scrollArr.push(pic.picUrl.split('/eshop/public')[1]);
-    			})
-				req.session.scrollArr = scrollArr;
-				logger.info('req.session.scrollArr', req.session.scrollArr);
-                req.session.scrollPicNum = scrollArr.length;
-		        res.render('home/index', {
-		            index: 'index',
-		            picOne: scrollArr[0],
-		            picTwo: scrollArr[1],
-		            picThree: scrollArr[2]
-		        });
+                logger.info('result', result);
+                if(result.length == 0) {
+                    req.session.scrollArr = [];
+                    req.session.scrollPicNum = 0;
+                    res.render('home/index', {
+                        index: 'index',
+                        picOne: '',
+                        picTwo: '',
+                        picThree: ''
+                    });
+                }else {
+                    result.forEach(function(pic) {
+                        scrollArr.push(pic.picUrl.split('/eshop/public')[1]);
+                    })
+                    req.session.scrollArr = scrollArr;
+                    logger.info('req.session.scrollArr', req.session.scrollArr);
+                    req.session.scrollPicNum = scrollArr.length;
+                    res.render('home/index', {
+                        index: 'index',
+                        picOne: scrollArr[0],
+                        picTwo: scrollArr[1],
+                        picThree: scrollArr[2]
+                    });
+                }
     		}
     	});
     })

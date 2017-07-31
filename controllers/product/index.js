@@ -18,15 +18,17 @@ module.exports = function(router) {
                 });
     		}else {
     			logger.info('clothResult', clothResult);
-    			clothResult.forEach(function(pic) {
-    				clothesArr.push(pic.picUrl.split('/eshop/public')[1]);
-    			})
-                req.session.clothesArr = clothesArr;
+                clothResult.forEach(function(pic) {
+                    clothesArr.push(pic.picUrl.split('/eshop/public')[1]);
+                })
+                req.session.clothesArr = clothesArr;  //路径数组
+                req.session.clothResult = clothResult; //数据库所有数据数组
+                res.locals.clothResult = clothResult;
                 res.locals.clothesArr = clothesArr;
-				logger.info('clothesArr====', clothesArr);
-		        res.render('product/womenCloth',{
+                logger.info('clothesArr====', clothesArr);
+                res.render('product/womenCloth',{
                     womenCloth: 'womenCloth'
-		        });
+                });    			
     		}
     	});
     })

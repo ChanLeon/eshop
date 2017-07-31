@@ -1,3 +1,4 @@
+<%var clothesPathArr = locals.clothesArr ? locals.clothesArr : []%>
 <div class='text-center col-xs-12 tab-pane fade' id='clothes'>
     <ul id="clothTab" class="nav nav-tabs" style='border:0;margin:0 auto;padding:0;'>
         <li class="active col-xs-4 text-center">
@@ -40,22 +41,29 @@
         </div>
         <div class='text-center col-xs-12 tab-pane fade' id='clothEdit'>
             <form enctype="multipart/form-data" method="post" action="/console/admin/upload" id="clothEdit_"> 
-                <div class="form-group" style='padding:15px 0 20px 0;'>
+                <div class="form-group" style='height:280px;'>
                     <div class='col-xs-12'>
                         <label for="scrollBan">选择需要被编辑的商品：</label>
                     </div>
-                    <div class='col-xs-4'>
-                        <input type="radio" value="0" name="flag" class='flag' checked/> 
-                        <img class='img-responsive center-block' src='<%= locals.picOne%>'>
-                    </div>
-                    <div class='col-xs-4'>
-                        <input type="radio" value="1" name="flag" class='flag'/>
-                        <img class='img-responsive center-block' src='<%= locals.picTwo%>'>
-                    </div>
-                    <div class='col-xs-4'>
-                        <input type="radio" value="2" name="flag" class='flag'/>
-                        <img class='img-responsive center-block' src='<%= locals.picThree%>'>
-                    </div>
+                    <%if(clothesPathArr.length == 0) {%>
+                        <div class='col-xs-12 text-center' style='height:200px;font-size:24px;margin-top:100px;'>
+                            <span>没有上架的商品，无法编辑，请增加女装上架</span>
+                        </div>
+                    <%}else {%>
+                    <%clothesPathArr.forEach(function(clothPath,i) {%>
+                        <%if(i == 0) {%>
+                            <div class='col-xs-2'>
+                                <input type="radio" value="<%= i%>" name="flag" class='flag' id='clothEditFlag' checked/> 
+                                <img class='img-responsive center-block' src='<%= clothPath%>'>
+                            </div>
+                        <%}else {%>
+                            <div class='col-xs-2'>
+                                <input type="radio" value="<%= i%>" name="flag" class='flag'  id='clothEditFlag'/> 
+                                <img class='img-responsive center-block' src='<%= clothPath%>'>
+                            </div>
+                        <%}%>
+                    <%})%>
+                    <%}%>
                 </div>
                 <div class="form-group">
                     <label for="picName">商品名字：</label>

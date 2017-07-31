@@ -16,10 +16,18 @@ module.exports = function(router){
     router.get('/admin/upload', auth, function(req, res) {
         if(req.session.info) {
             var scrollArr = req.session.scrollArr;
-            res.locals.picOne = scrollArr[0];
-            res.locals.picTwo = scrollArr[1];
-            res.locals.picThree = scrollArr[2];
-            var picNumber = req.session.scrollPicNum;
+            if(scrollArr.length == 0){
+                res.locals.picOne = '';
+                res.locals.picTwo = '';
+                res.locals.picThree = '';
+            }else {
+                res.locals.picOne = scrollArr[0];
+                res.locals.picTwo = scrollArr[1];
+                res.locals.picThree = scrollArr[2];
+            }            
+            var picNumber = req.session.scrollPicNum;            
+            res.locals.clothesArr = req.session.clothesArr;  //女装图片路径数组
+            res.locals.clothResult = req.session.clothResult;  //女装图片数据数组
             console.log('picNumber', picNumber);
             res.render('console/index', {
                 console: 'console',
@@ -35,14 +43,6 @@ module.exports = function(router){
     })
 
     router.post('/admin/upload', function(req, res) {
-
-        // switch(req.body.scrollPic){
-        //     case 'scroll':
-        //     case 'create':
-        //       thePath = '../../public/scroll';
-        //       break;
-            
-        // }
 
         var thePath = ['scroll', 'create'].indexOf(req.body.scrollPic) > -1 && '../../public/scroll' || ['clothAdd' , 'clothEdit' , 'clothDel'].indexOf(req.body.scrollPic) > -1 && '../../public/clothes' || ['bagsAdd','bagsEdit','bagsDel'].indexOf(req.body.scrollPic) > -1 && '../../public/bags' || '../../public/shoes'
 
@@ -113,15 +113,15 @@ module.exports = function(router){
                             }                
                         })  
                     }else if(picCond.scrollPic == 'scroll') {
-                        picInfo.findOneAndUpdate({picFlat: picCond.flag}, {
+                        picInfo.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
                             '$set':condition
                         },{
                             'upsert': true
                         }, function(err, result){
                             if(err){
-                               logger.info('创建数据库出错', err);
+                               logger.info('更换滚动图片出错', err);
                                 res.render('contact/rs', {
-                                    err: '创建数据库出错',
+                                    err: '更换滚动图片出错',
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
@@ -139,7 +139,7 @@ module.exports = function(router){
                                 }); 
                             }else {
                                 logger.info('create clothResult==', clothResult);
-                                res.redirect('/console/admin/upload');                                                             
+                                res.redirect('/product/womenCloth');                                                             
                             }                
                         })
                     }                    
@@ -147,6 +147,32 @@ module.exports = function(router){
             }catch(e) {
                 logger.trace('导入图片出现错误', e);
                 return false;
+            }
+        }else {
+            var cond = {
+                picId: cipher.md5['+'](picCond.picUrl + picTime),
+                picName: picCond.picName, 
+                picPrice: picCond.picPrice,
+                picFlat: parseInt(picCond.flag),
+                picTime: picTime
+            }
+            if(picCond.scrollPic == 'clothEdit') {
+                ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
+                    '$set':cond
+                },{
+                    'upsert': true
+                }, function(err, result){
+                    if(err){
+                       logger.info('编辑女装商品出错', err);
+                        res.render('contact/rs', {
+                            err: '编辑女装商品出错',
+                            cb: '/console/admin/upload'
+                        }); 
+                    }else {
+                        logger.info('scroll result==', result);
+                        res.redirect('/product/womenCloth');
+                    }                
+                }) 
             }
         }
     })
