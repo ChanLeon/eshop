@@ -1,13 +1,39 @@
 $(document).ready(function(){
     let $uploadForm = $('#upload');
     let $uploadSub = $uploadForm.find('.upload');
-    let $picUrl = $uploadForm.find('#picUrl');
-    let $picName = $uploadForm.find('#picName');
-    let $picPrice = $uploadForm.find('#picPrice');
+    let $picInfo = $uploadForm.find('#file');
+
+    let $createPicInfo = $('.createPicInfo');
+    let $createPicForm = $('#createPic');
+    let $createPicSub = $createPicForm.find('.createPic');
+    let $createInfo = $createPicForm.find('#file');
+
+    $createPicInfo.on('click', function() {
+        $('#pic_modal').modal('show');
+    })
+
+    $createPicSub.on('click', function(){
+        if($createInfo.val().length == 0) {
+            var str = '请选择需要上传的图片，否则不能更新';
+            $('.errInfo').text(str);
+            return false;
+        }else if($createInfo.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($createInfo.val())){
+            var str = '请选择图片格式文件上传';
+            $('.errInfo').text(str);
+            return false;
+        }else {
+            $('#pic_modal').modal('hide');
+            $createPicForm.submit();
+        }
+    })
 
     $uploadSub.on('click', function(){
-        if($.trim($picUrl.val()).length == 0 && $.trim($picName.val()).length == 0 && $.trim($picPrice.val()).length == 0) {
-            var str = '三个输入框为空，不能更新';
+        if($picInfo.val().length == 0) {
+            var str = '请选择需要上传的图片，否则不能更新';
+            $('.errInfo').text(str);
+            return false;
+        }else if($picInfo.val() && !/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test($picInfo.val())){
+            var str = '请选择图片格式文件上传';
             $('.errInfo').text(str);
             return false;
         }else {

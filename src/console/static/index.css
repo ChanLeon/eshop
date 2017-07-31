@@ -30,6 +30,16 @@ body {
 	margin-bottom:30px;
 }
 
+#pic_modal button.close{
+    margin-top: -30px !important;
+    margin-right: 10px;        
+    font-size: 1.5em;
+}
+
+.createDis {
+	display: none;
+}
+
 
 
 

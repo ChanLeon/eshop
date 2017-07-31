@@ -14,39 +14,61 @@
 			<div class="panel">
 				<div class='panel-heading'>
 					<h2>更新图片信息</h2>
+					<button type='button' class="btn btn-success createPicInfo <%= locals.picNumber == 3 ? 'createDis' : '' %>" style='color:#fff;padding:8px 20px;'>创建滚动图片
+					</button>
 				</div>
 				<div class='panel-body' style='margin: 70px 30px 70px 30px;'>
-					<div class='text-left col-xs-6'>
-						<form action="/console/admin/upload" method="post" id="upload">
-							<div class="form-group">
-								<label for="picUrl">图片路径：</label>
-								<input type="text" class="form-control picUrl" name="picUrl" id='picUrl' placeholder="填写图片路径">
-							</div>
-							<div class="form-group">
+					<div class='text-center col-xs-12'>
+						<form enctype="multipart/form-data" method="post" action="/console/admin/upload" id="upload">
+							<!-- <div class="form-group">
 								<label for="picName">商品名字：</label>
 								<input type="text" name="picName" class="form-control picName" id='picName' placeholder="填写商品名称">
 							</div>
 							<div class="form-group">
 								<label for="picPrice">商品价格：</label>
 								<input type="text" name="picPrice" class="form-control picPrice" id='picPrice' placeholder="填写商品价格">
+							</div> -->
+							<div class="form-group" style='padding:15px 0 20px 0;'>
+								<div class='col-xs-12'>
+									<label for="scrollBan">选择需要被更换的图片：</label>
+								</div>
+								<div class='col-xs-4'>
+									<input type="radio" value="0" name="flag" class='flag' checked/> 
+									<img class='img-responsive center-block' src='<%= locals.picOne%>'>
+								</div>
+								<div class='col-xs-4'>
+									<input type="radio" value="1" name="flag" class='flag'/>
+									<img class='img-responsive center-block' src='<%= locals.picTwo%>'>
+								</div>
+								<div class='col-xs-4'>
+									<input type="radio" value="2" name="flag" class='flag'/>
+									<img class='img-responsive center-block' src='<%= locals.picThree%>'>
+								</div>
 							</div>
-							<div class="text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
+							<div class="col-xs-12 form-group text-center" style='padding:30px 0 0 0;'>
+								<input class="btn btn-primary" type='file' id='file' name='file' style='margin:50px auto 0;'>
+							</div>
+							<div class="col-xs-12 text-center err" style='margin-bottom: 20px;color:#f00;font-size:18px;'>
 								<span class='errInfo'></span>
 							</div>
-							<div class='form-group text-center'>
-								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">			
-								<button type='button' class="btn btn-success upload" style='color:#fff;padding:8px 20px;'>更新信息</button>
+							<div class='col-xs-12 form-group text-center'>
+								<input type="hidden" name="_csrf" value="<%-locals._csrf%>">		
+								<input type='hidden' name='scrollPic' value='scroll'>
+								<button type='button' class="btn btn-success upload" style='color:#fff;padding:8px 20px;'>更换图片</button>
 							</div>
 						</form>
-					</div>
-					<div class='text-right col-xs-6'>
-						<img src='../../account/static/image/login.png' class='img-responsive center-block'>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--inline[./create_pic.ejs]-->
 	<!--inline[../../common/page/footer.ejs]-->
     <!--inline[../../common/page/foot.ejs]-->
+    <!-- <script>
+    	$(function() {
+    		$('#pic_modal').modal('show');
+    	})
+    </script> -->
 </body>
 </html>

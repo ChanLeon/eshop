@@ -13,10 +13,15 @@
         <!--inline[../../common/page/header.ejs]-->
        <!--轮播图开始-->
         <div class="banner">
+        <div class='scrollPic'>
+            <img style='display:none;' src='<%= locals.picOne%>'>
+            <img style='display:none;' src='<%= locals.picTwo%>'>
+            <img style='display:none;' src='<%= locals.picThree%>'>
+        </div>
             <div class="b-img">
-                <a class='one' href="#"></a>
-                <a class='second' href="#"></a>
-                <a class='three' href="#"></a>
+                <a class='scroll0' href="#"></a>
+                <a class='scroll1' href="#"></a>
+                <a class='scroll2' href="#"></a>
             </div>
             <div class="b-list"></div>
             <a class="bar-left" href="#"><em></em></a>
@@ -50,20 +55,39 @@
         </div>
 
         <%
-        var allThings = [{
+        var allThings = [
+        {
             one: 'MOTHER 侧边竖条纹高腰阶梯毛边九分小脚牛仔裤',
-            onePrice: 1198.00,
+            onePrice: '1,198.00',
             two: 'GRLFRND Cindy 翘臀神器高腰磨破牛仔短裤',
-            twoPrice: 950.00,
+            twoPrice: '950.00',
             three: 'R13 17 BF经典百搭宽松条纹T恤连衣裙',
-            threePrice: 1250.00,
+            threePrice: '1,250.00',
             four: 'sandro 新款提花条纹针织短袖修身连衣裙',
-            fourPrice: 1138.00,
+            fourPrice: '1,138.00',
             five: 'vetements champion 飘带纯棉刺绣长款短袖T恤',
-            fivePrice: 960.00,
+            fivePrice: '960.00',
             six: 'R13 陈乔恩同款经典百搭条纹圆领宽松',
-            sixPrice: 880.00
-        },{},{},{}];
+            sixPrice: '880.00'
+        },{
+            one: 'Sloan 大号皮质单肩包',
+            onePrice: '4,500.00',
+            two: 'Lauryn 中号皮质单肩包',
+            twoPrice: '2,400.00',
+            three: 'Rhea Zip 中号皮质双肩背包',
+            threePrice: '5,200.00',
+            four: 'Hamilton 小号皮质手提包',
+            fourPrice: '3,800.00',
+            five: 'Mercer 大号皮质托特手袋',
+            fivePrice: '4,200.00',
+        },{
+            one: 'Nancy Flex 漆皮中跟鞋',
+            onePrice: '1,600.00',
+            two: 'Blaze 皮质高跟鞋',
+            twoPrice: '2,000.00',
+            three: 'Blaze 皮质短靴',
+            threePrice: '2,800.00'
+        }];
         %>
         
         
@@ -151,8 +175,8 @@
                     <div class='col-xs-6 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/bagFour.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.one%></p>
-                            <p class="text-center">¥<%= v.onePrice%></p>
+                            <p class="text-center"><%= v.four%></p>
+                            <p class="text-center">¥<%= v.fourPrice%></p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -161,8 +185,8 @@
                     <div class='col-xs-6 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/bagFive.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.two%></p>
-                            <p class="text-center">¥<%= v.twoPrice%></p>
+                            <p class="text-center"><%= v.five%></p>
+                            <p class="text-center">¥<%= v.fivePrice%></p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -173,8 +197,8 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/bagOne.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.four%></p>
-                            <p class="text-center">¥<%= v.fourPrice%></p>
+                            <p class="text-center"><%= v.one%></p>
+                            <p class="text-center">¥<%= v.onePrice%></p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -183,8 +207,8 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/bagTwo.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.five%></p>
-                            <p class="text-center">¥<%= v.fivePrice%></p>
+                            <p class="text-center"><%= v.two%></p>
+                            <p class="text-center">¥<%= v.twoPrice%></p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -193,49 +217,8 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/bagThree.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.six%></p>
-                            <p class="text-center">¥<%= v.sixPrice%></p>
-                        </div>
-                        <div class='text-center buy'>
-                            <button type='button' class='btn btn-default'>购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%}else if(i == 2){%>
-            <div class='col-xs-12 text-center shoes'>
-                <hr style='border-top:1px solid #d6d6d6'/>
-                <div class='text-center' style='margin-top:50px;'>
-                    <span style='color:#000;font-size:30px;'>前卫女鞋</span>
-                    <img class='img-responsive center-block' src='../static/image/topShoes.jpg' style='border:0;margin-top:8px;'>
-                </div>
-                <div class='col-xs-12 text-center opa'>
-                    <div class='col-xs-6 text-center'>
-                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesTwo.jpg'><div class="text-center row opaModel">
-                            <p class="text-center"><%= v.four%></p>
-                            <p class="text-center">¥<%= v.fourPrice%></p>
-                        </div>
-                        <div class='text-center buy'>
-                            <button type='button' class='btn btn-default'>购买</button>
-                        </div>
-                    </div>
-                    <div class='col-xs-6 text-center'>
-                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesThree.jpg'>
-                        <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.five%></p>
-                            <p class="text-center">¥<%= v.fivePrice%></p>
-                        </div>
-                        <div class='text-center buy'>
-                            <button type='button' class='btn btn-default'>购买</button>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-xs-12 text-center opa'>                    
-                    <div class='col-xs-12 text-center'>
-                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesOne.jpg'>
-                        <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.one%></p>
-                            <p class="text-center">¥<%= v.onePrice%></p>
+                            <p class="text-center"><%= v.three%></p>
+                            <p class="text-center">¥<%= v.threePrice%></p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -244,7 +227,49 @@
                 </div>
             </div>
             <%}else {%>
-            <div class='col-xs-12 text-center child_cloth'>
+            <div class='col-xs-12 text-center shoes'>
+                <hr style='border-top:1px solid #d6d6d6'/>
+                <div class='text-center' style='margin-top:50px;'>
+                    <span style='color:#000;font-size:30px;'>前卫女鞋</span>
+                    <img class='img-responsive center-block' src='../static/image/topShoes.png' style='border:0;margin-top:8px;'>
+                </div>
+                <div class='col-xs-12 text-center opa'>
+                    <div class='col-xs-6 text-center'>
+                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesTwo.jpg'><div class="text-center row opaModel">
+                            <p class="text-center"><%= v.one%></p>
+                            <p class="text-center">¥<%= v.onePrice%></p>
+                        </div>
+                        <div class='text-center buy'>
+                            <button type='button' class='btn btn-default'>购买</button>
+                        </div>
+                    </div>
+                    <div class='col-xs-6 text-center'>
+                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesThree.jpg'>
+                        <div class="text-center row opaModel">
+                            <p class="text-center"><%= v.two%></p>
+                            <p class="text-center">¥<%= v.twoPrice%></p>
+                        </div>
+                        <div class='text-center buy'>
+                            <button type='button' class='btn btn-default'>购买</button>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-xs-12 text-center opa'>                    
+                    <div class='col-xs-12 text-center'>
+                        <img class='img-responsive center-block' src='../static/image/pic_detail/shoesOne.png'>
+                        <div class="text-center row opaModel">
+                            <p class="text-center"><%= v.three%></p>
+                            <p class="text-center">¥<%= v.threePrice%></p>
+                        </div>
+                        <div class='text-center buy'>
+                            <button type='button' class='btn btn-default'>购买</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <%})%>
+            <!-- <div class='col-xs-12 text-center child_cloth'>
                 <hr style='border-top:1px solid #d6d6d6'/>
                 <div class='text-center' style='margin-top:50px;'>
                     <span style='color:#000;font-size:30px;'>酷帅童装</span>
@@ -254,8 +279,8 @@
                     <div class='col-xs-12 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/kidsCloth.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.one%></p>
-                            <p class="text-center">¥<%= v.onePrice%></p>
+                            <p class="text-center"></p>
+                            <p class="text-center">¥</p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -266,8 +291,8 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/kidOne.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.four%></p>
-                            <p class="text-center">¥<%= v.fourPrice%></p>
+                            <p class="text-center"></p>
+                            <p class="text-center">¥</p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -276,8 +301,8 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/kidTwo.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.five%></p>
-                            <p class="text-center">¥<%= v.fivePrice%></p>
+                            <p class="text-center"></p>
+                            <p class="text-center">¥</p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
@@ -286,17 +311,15 @@
                     <div class='col-xs-4 text-center'>
                         <img class='img-responsive center-block' src='../static/image/pic_detail/kidThree.jpg'>
                         <div class="text-center row opaModel">
-                            <p class="text-center"><%= v.six%></p>
-                            <p class="text-center">¥<%= v.sixPrice%></p>
+                            <p class="text-center"></p>
+                            <p class="text-center">¥</p>
                         </div>
                         <div class='text-center buy'>
                             <button type='button' class='btn btn-default'>购买</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <%}%>
-            <%})%>
+            </div> -->
         </div>
         <!--inline[../../common/page/footer.ejs]-->
         <!--inline[../../common/page/foot.ejs]-->
