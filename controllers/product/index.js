@@ -34,9 +34,29 @@ module.exports = function(router) {
     })
 
     router.get('/womenBag', auth, function(req, res) {
-        res.render('product/womenBag',{
-            womenBag: 'womenBag'
-        });
+        var bagsArr = [];
+    	bagsPic.find({}, null, null, function(err, bagResult) {
+    		if(err){
+    			logger.info('查询女包数据出错', err);
+                res.render('contact/rs', {
+                    err: '查询女包数据出错',
+                    cb: '/home/index'
+                });
+    		}else {
+    			logger.info('bagResult', bagResult);
+                bagResult.forEach(function(pic) {
+                    bagsArr.push(pic.picUrl.split('/eshop/public')[1]);
+                })
+                req.session.bagsArr = bagsArr;  //路径数组
+                req.session.bagResult = bagResult; //数据库所有数据数组
+                res.locals.bagResult = bagResult;
+                res.locals.bagsArr = bagsArr;
+                logger.info('bagsArr====', bagsArr);
+                res.render('product/womenBag',{
+                    womenBag: 'womenBag'
+                });   			
+    		}
+    	});        
     })
 
     router.get('/womenShoes', auth, function(req, res) {

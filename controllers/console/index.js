@@ -48,7 +48,7 @@ module.exports = function(router){
 
         console.log('thePath', thePath);
         var picCond = req.body;
-        console.log('pic cond', picCond);
+        console.log('pic cond=====', picCond);
         var picTime = moment().format('YYYY-MM-DD HH:mm:ss');
         if(req.files.file && req.files.file.name) {
             try {
@@ -68,20 +68,27 @@ module.exports = function(router){
                     fs.unlinkSync(temPath);
                     if(picCond.scrollPic == 'create' || picCond.scrollPic == 'scroll'){
                         var condition = {
-                            picId: cipher.md5['+'](picCond.picUrl + picTime),
+                            picId: cipher.md5['+'](picCond.scrollPic + picTime),
                             picUrl: targetPath,
                             picFlat: parseInt(picCond.flag),
                             picTime: picTime
                         }
                     }else {
                         var cond = {
-                            picId: cipher.md5['+'](picCond.picUrl + picTime),
+                            picId: cipher.md5['+'](picCond.scrollPic + picTime),
                             picUrl: targetPath,
-                            picName: picCond.picName, 
-                            picPrice : picCond.picPrice,
                             picFlat: parseInt(picCond.flag),
                             picTime: picTime
                         }
+                        if(picCond.picName == '' && picCond.picPrice != '') {
+                            cond.picPrice = picCond.picPrice;
+                        }else if(picCond.picName != '' && picCond.picPrice == '') {
+                            cond.picName = picCond.picName;
+                        }else if(picCond.picName != '' && picCond.picPrice != '') {
+                            cond.picPrice = picCond.picPrice;
+                            cond.picName = picCond.picName;
+                        }
+                        logger.info('cond====', cond);
                     }
                     if(picCond.scrollPic == 'create') {
                         picInfo.create(condition, function(err, result){
@@ -129,50 +136,187 @@ module.exports = function(router){
                                 res.redirect('/home/index')
                             }                
                         }) 
-                    }else if(picCond.scrollPic == 'clothAdd') {
-                        ladyPic.create(cond, function(err, clothResult){
+                    }else if(picCond.scrollPic == 'clothAdd' || picCond.scrollPic == 'bagsAdd' || picCond.scrollPic == 'shoesAdd') {
+                        var addDb = picCond.scrollPic == 'clothAdd' ? ladyPic : picCond.scrollPic == 'bagsAdd' ? bagsPic : shoesPic;
+                        var addLink = picCond.scrollPic == 'clothAdd' ? '/product/womenCloth' : picCond.scrollPic == 'bagsAdd' ? '/product/womenBag' : '/product/womenShoes';
+                        var addSplit = picCond.scrollPic == 'clothAdd' ? '/eshop/public/clothes/' : picCond.scrollPic == 'bagsAdd' ? '/eshop/public/bags/' : '/eshop/public/shoes/';
+                        async.auto({
+                            'searchResult': function(cb) {
+                                addDb.find(function(error, searchData) {
+                                    if(error) {
+                                        logger.info('在增加商品时，查询数据库出错', error);
+                                        cb({
+                                            err: '在增加商品时，查询数据库出错',
+                                            cb: '/console/admin/upload'
+                                        });
+                                    }else {
+                                        logger.info('在增加商品时，查询数据库成功');
+                                        cb(null, searchData);
+                                    }
+                                })
+                            },
+                            'createResult': ['searchResult', function(callback, cbSearchResult) {
+                                var searchArr = cbSearchResult.searchResult;
+                                searchArr.forEach(function(goodsData, i) {
+                                    var goodsName = goodsData.picUrl.split(addSplit)[1];
+                                    var goodsFlag = goodsData.picFlat;
+                                    if(goodsName == temName && goodsFlag == picCond.flag) {
+                                        callback(null, {
+                                            err: '图片名称重复与图片标识号重复',
+                                            cb: '/console/admin/upload'
+                                        });
+                                    }else if(goodsName == temName && goodsFlag != picCond.flag) {
+                                       callback(null, {
+                                            err: '图片名称重复',
+                                            cb: '/console/admin/upload'
+                                        });
+                                    }else if(goodsName != temName && goodsFlag == picCond.flag) {
+                                       callback(null, {
+                                            err: '图片标识重复',
+                                            cb: '/console/admin/upload'
+                                        });
+                                    }else {
+                                        addDb.create(cond, function(err_, clothResult){
+                                            if(err_){
+                                                logger.info('创建数据库出错', err_);
+                                                callback({
+                                                    err: '创建数据库出错',
+                                                    cb: '/console/admin/upload'
+                                                });
+                                            }else {
+                                                logger.info('创建数据库成功', clothResult);
+                                                callback(null,  {
+                                                    err: '成功增加商品',
+                                                    cb: addLink
+                                                });                                                             
+                                            }                
+                                        })
+                                    }                                   
+                                })
+                            }]
+                        }, function(err, clothAddResult) {
+                            if(err) {
+                                res.render('contact/rs', err); 
+                            }else {
+                                res.render('contact/rs', clothAddResult.createResult);
+                            }
+                        })
+                    }else if(picCond.scrollPic == 'clothEdit') {
+                        ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
+                            '$set':cond
+                        },{
+                            'upsert': true
+                        }, function(err, clothEditResult){
                             if(err){
-                               logger.info('创建女装数据库出错', err);
+                                logger.info('编辑商品出错', err);
                                 res.render('contact/rs', {
-                                    err: '创建女装数据库出错',
+                                    err: '编辑商品出错',
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
-                                logger.info('create clothResult==', clothResult);
-                                res.redirect('/product/womenCloth');                                                             
+                                logger.info('scroll result==', clothEditResult);
+                                res.render('contact/rs', {
+                                    err: '编辑商品完成',
+                                    cb: '/product/womenCloth'
+                                });
                             }                
-                        })
-                    }                    
+                        }) 
+                    }                  
                 })
             }catch(e) {
                 logger.trace('导入图片出现错误', e);
                 return false;
             }
         }else {
-            var cond = {
-                picId: cipher.md5['+'](picCond.picUrl + picTime),
-                picName: picCond.picName, 
-                picPrice: picCond.picPrice,
-                picFlat: parseInt(picCond.flag),
-                picTime: picTime
-            }
-            if(picCond.scrollPic == 'clothEdit') {
-                ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
-                    '$set':cond
-                },{
-                    'upsert': true
-                }, function(err, result){
-                    if(err){
-                       logger.info('编辑女装商品出错', err);
-                        res.render('contact/rs', {
-                            err: '编辑女装商品出错',
-                            cb: '/console/admin/upload'
-                        }); 
-                    }else {
-                        logger.info('scroll result==', result);
-                        res.redirect('/product/womenCloth');
-                    }                
-                }) 
+            try {
+                var cond = {
+                    picId: cipher.md5['+'](picCond.scrollPic + picTime),
+                    picFlat: parseInt(picCond.flag),
+                    picTime: picTime
+                }
+                if(picCond.picName == '' && picCond.picPrice != '') {
+                    cond.picPrice = picCond.picPrice;
+                }else if(picCond.picName != '' && picCond.picPrice == ''){
+                    cond.picName = picCond.picName;
+                }else if(picCond.picName != '' && picCond.picPrice != '') {
+                    cond.picPrice = picCond.picPrice;
+                    cond.picName = picCond.picName;
+                }
+                logger.info('cond====', cond);
+
+                if(picCond.scrollPic == 'clothEdit') {
+                    ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
+                        '$set':cond
+                    },{
+                        'upsert': true
+                    }, function(err, result){
+                        if(err){
+                            logger.info('编辑商品出错', err);
+                            res.render('contact/rs', {
+                                err: '编辑商品出错',
+                                cb: '/console/admin/upload'
+                            }); 
+                        }else {
+                            res.render('contact/rs', {
+                                err: '编辑商品完成',
+                                cb: '/product/womenCloth'
+                            });
+                        }                
+                    }) 
+                }else if(picCond.scrollPic == 'clothDel') {
+                    async.series({
+                        'searchPic': function(cb) {
+                            ladyPic.findOne({picFlat: parseInt(picCond.flag)}, function(err, searchPicInfo) {
+                                if(err) {
+                                    logger.info('查询被删除商品信息出错', err);
+                                    cb({
+                                        err: '查询被删除商品信息出错',
+                                        cb: '/console/admin/upload' 
+                                    })
+                                }else {
+                                    logger.info('查询被删除商品信息', searchPicInfo);
+                                    cb(null,searchPicInfo.picUrl);
+                                }
+                            })
+                        },
+                        'removeInfo': function(callback) {
+                            ladyPic.remove({picFlat: parseInt(picCond.flag)}, function(err) {
+                                if(err){
+                                    logger.info('删除女装商品出错', err);
+                                    callback({
+                                        err: '删除女装商品出错',
+                                        cb: '/console/admin/upload'
+                                    }); 
+                                }else {
+                                    logger.info('删除女装商品成功');
+                                    callback(null, {
+                                        err: '删除商品成功',
+                                        cb: '/product/womenCloth'
+                                    }); 
+                                } 
+                            })
+                        }
+                    }, function(err, clothDelInfo) {
+                        if(err) {
+                            res.render('contact/rs',err);
+                        }else {
+                            logger.info('查询被删除商品的存储url信息', clothDelInfo.searchPic);
+                            var picUrlInfo = clothDelInfo.searchPic;
+                            if(picUrlInfo) {
+                                fs.unlinkSync(picUrlInfo);
+                                res.render('contact/rs',clothDelInfo.removeInfo);
+                            }else {
+                                res.render('contact/rs',{
+                                    err: '商品的路径不存在，删除失败',
+                                    cb: '/product/womenCloth'
+                                });
+                            }
+                        }
+                    })
+                }
+            }catch(e) {
+                logger.trace('编辑商品或者删除商品出错', e);
+                return false;
             }
         }
     })

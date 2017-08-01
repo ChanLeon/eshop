@@ -25,6 +25,18 @@ $(document).ready(function(){
     let $clothEditPrice = $clothEditForm.find('#clothEditPrice');
     let $clothEditFile = $clothEditForm.find('#clothEditFile');
 
+    //女装删除商品
+    let $clothDelForm = $('#clothDel_');
+    let $clothDelSub = $clothDelForm.find('.clothDel_');
+
+    //女包增加商品
+    let $bagsAddForm = $('#bagsAdd_');
+    let $bagsAddSub = $bagsAddForm.find('.bagsAdd_');
+    let $bagsAddName = $bagsAddForm.find('#bagsAddName');
+    let $bagsAddPrice = $bagsAddForm.find('#bagsAddPrice');
+    let $bagsAddFlag = $bagsAddForm.find('#bagsAddFlag');
+    let $bagsAddFile = $bagsAddForm.find('#bagsAddFile');
+
     //滚动图片的初始化增加
     $createPicInfo.on('click', function() {
         $('#pic_modal').modal('show');
@@ -33,11 +45,11 @@ $(document).ready(function(){
     $createPicSub.on('click', function(){
         if($createInfo.val().length == 0) {
             var str = '请选择需要上传的图片，否则不能更新';
-            $('.errInfo').text(str);
+            $('#createPic .errInfo').text(str);
             return false;
         }else if($createInfo.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($createInfo.val())){
             var str = '请选择图片格式文件上传';
-            $('.errInfo').text(str);
+            $('#createPic .errInfo').text(str);
             return false;
         }else {
             $('#pic_modal').modal('hide');
@@ -49,11 +61,11 @@ $(document).ready(function(){
     $uploadSub.on('click', function(){
         if($picInfo.val().length == 0) {
             var str = '请选择需要上传的图片，否则不能更新';
-            $('.errInfo').text(str);
+            $('#upload .errInfo').text(str);
             return false;
         }else if($picInfo.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($picInfo.val())){
             var str = '请选择图片格式文件上传';
-            $('.errInfo').text(str);
+            $('#upload .errInfo').text(str);
             return false;
         }else {
             $uploadForm.submit();
@@ -63,12 +75,12 @@ $(document).ready(function(){
     //女装增加商品提交
     $clothAddSub.on('click', function() {
         if($.trim($clothAddName.val()).length == 0 || $.trim($clothAddPrice.val()).length == 0 || $.trim($clothAddFlag.val()).length == 0 || $clothAddFile.val().length == 0) {
-            var str = '商品信息不能为空';
-            $('.errInfo').text(str);
+            var str = '女装商品信息不能为空';
+            $('#clothAdd_ .errInfo').text(str);
             return false;
         }else if($clothAddFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($clothAddFile.val())){
             var str = '请选择图片格式文件上传';
-            $('.errInfo').text(str);
+            $('#clothAdd_ .errInfo').text(str);
             return false;
         }else {
             $clothAddForm.submit();
@@ -79,17 +91,40 @@ $(document).ready(function(){
     $clothEditSub.on('click', function() {
         if($.trim($clothEditName.val()).length == 0 && $.trim($clothEditPrice.val()).length == 0 && $clothEditFile.val().length == 0) {
             var str = '商品编辑信息不能全部为空';
-            $('.errInfo').text(str);
+            $('#clothEdit_ .errInfo').text(str);
             return false;
         }else if($clothEditFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($clothEditFile.val())){
             var str = '请选择图片格式文件上传';
-            $('.errInfo').text(str);
+            $('#clothEdit_ .errInfo').text(str);
             return false;
         }else {
             $clothEditForm.submit();
         }
     })
 
+    //女装删除商品
+    $clothDelSub.on('click', function() {
+        if(confirm('确定要删除该商品吗？')) {
+            $clothDelForm.submit();
+        }else {
+            return false;
+        }
+    })
+
+    //女装增加商品提交
+    $bagsAddSub.on('click', function() {
+        if($.trim($bagsAddName.val()).length == 0 || $.trim($bagsAddPrice.val()).length == 0 || $.trim($bagsAddFlag.val()).length == 0 || $bagsAddFile.val().length == 0) {
+            var str = '女包商品信息不能为空';
+            $('#bagsAdd_ .errInfo').text(str);
+            return false;
+        }else if($bagsAddFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($bagsAddFile.val())){
+            var str = '请选择图片格式文件上传';
+            $('#bagsAdd_ .errInfo').text(str);
+            return false;
+        }else {
+            $bagsAddForm.submit();
+        }
+    })
 
 
 
