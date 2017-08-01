@@ -9,18 +9,18 @@
     </head>
     <body>
         <!--inline[../../common/page/header.ejs]-->
-        <%var clothResult_ = locals.clothResult ? locals.clothResult : []%>
-        <%var clothesArr_ = locals.clothesArr ? locals.clothesArr : []%>
+        <%var bagResult_ = locals.bagResult ? locals.bagResult : []%>
+        <%var bagsArr_ = locals.bagsArr ? locals.bagsArr : []%>
         <div class='container'>
             <div class='text-center ladyClothes'>
-                <%if(clothResult_.length == 0) {%>
+                <%if(bagResult_.length == 0) {%>
                     <div class='col-xs-12 text-center' data-no='' style='height:300px;margin-top:200px;font-size:24px;'>
                         <span>商品即将上架，敬请期待</span>
                     </div>
                 <%}else {%>
-                    <% clothResult_.forEach(function(data, i) {%>
+                    <% bagResult_.forEach(function(data, i) {%>
                         <div class='col-xs-3 text-center' data-no='<%= i%>'>
-                            <img class='img-responsive center-block' src='<%= clothesArr_[i]%>'>                         
+                            <img class='img-responsive center-block' src='<%= bagsArr_[i]%>'>                         
                             <div class="text-center row opaModel">
                                 <p class="text-center"><%= data.picName%></p>
                                 <p class="text-center">¥<%= data.picPrice%></p>

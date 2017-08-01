@@ -37,6 +37,36 @@ $(document).ready(function(){
     let $bagsAddFlag = $bagsAddForm.find('#bagsAddFlag');
     let $bagsAddFile = $bagsAddForm.find('#bagsAddFile');
 
+    //女包编辑商品
+    let $bagsEditForm = $('#bagsEdit_');
+    let $bagsEditSub = $bagsEditForm.find('.bagsEdit_');
+    let $bagsEditName = $bagsEditForm.find('#bagsEditName');
+    let $bagsEditPrice = $bagsEditForm.find('#bagsEditPrice');
+    let $bagsEditFile = $bagsEditForm.find('#bagsEditFile');
+
+    //女包删除商品
+    let $bagsDelForm = $('#bagsDel_');
+    let $bagsDelSub = $bagsDelForm.find('.bagsDel_');
+
+    //女鞋增加商品提交
+    let $shoesAddForm = $('#shoesAdd_');
+    let $shoesAddSub = $shoesAddForm.find('.shoesAdd_');
+    let $shoesAddName = $shoesAddForm.find('#shoesAddName');
+    let $shoesAddPrice = $shoesAddForm.find('#shoesAddPrice');
+    let $shoesAddFlag = $shoesAddForm.find('#shoesAddFlag');
+    let $shoesAddFile = $shoesAddForm.find('#shoesAddFile');
+
+    //女鞋编辑商品
+    let $shoesEditForm = $('#shoesEdit_');
+    let $shoesEditSub = $shoesEditForm.find('.shoesEdit_');
+    let $shoesEditName = $shoesEditForm.find('#shoesEditName');
+    let $shoesEditPrice = $shoesEditForm.find('#shoesEditPrice');
+    let $shoesEditFile = $shoesEditForm.find('#shoesEditFile');
+
+    //女鞋删除商品
+    let $shoesDelForm = $('#shoesDel_');
+    let $shoesDelSub = $shoesDelForm.find('.shoesDel_');
+
     //滚动图片的初始化增加
     $createPicInfo.on('click', function() {
         $('#pic_modal').modal('show');
@@ -104,14 +134,19 @@ $(document).ready(function(){
 
     //女装删除商品
     $clothDelSub.on('click', function() {
-        if(confirm('确定要删除该商品吗？')) {
-            $clothDelForm.submit();
-        }else {
+        if($('.noClothes').text() == '没有上架的商品，无法删除商品，请增加女装上架') {
+            alert('没有任何可删除的商品，请上架女装');
             return false;
-        }
+        }else {
+            if(confirm('确定要删除该商品吗？')) {
+                $clothDelForm.submit();
+            }else {
+                return false;
+            }
+        }        
     })
 
-    //女装增加商品提交
+    //女包增加商品提交
     $bagsAddSub.on('click', function() {
         if($.trim($bagsAddName.val()).length == 0 || $.trim($bagsAddPrice.val()).length == 0 || $.trim($bagsAddFlag.val()).length == 0 || $bagsAddFile.val().length == 0) {
             var str = '女包商品信息不能为空';
@@ -126,6 +161,76 @@ $(document).ready(function(){
         }
     })
 
+    //女包编辑商品
+    $bagsEditSub.on('click', function() {
+        if($.trim($bagsEditName.val()).length == 0 && $.trim($bagsEditPrice.val()).length == 0 && $bagsEditFile.val().length == 0) {
+            var str = '商品编辑信息不能全部为空';
+            $('#bagsEdit_ .errInfo').text(str);
+            return false;
+        }else if($bagsEditFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($bagsEditFile.val())){
+            var str = '请选择图片格式文件上传';
+            $('#bagsEdit_ .errInfo').text(str);
+            return false;
+        }else {
+            $bagsEditForm.submit();
+        }
+    })
 
+    //女包删除商品
+    $bagsDelSub.on('click', function() {
+        if($('.noBags').text() == '没有上架的商品，无法删除商品，请增加女包上架') {
+            alert('没有任何可删除的商品，请上架女包');
+            return false;
+        }else {
+           if(confirm('确定要删除该商品吗？')) {
+                $bagsDelForm.submit();
+            }else {
+                return false;
+            } 
+        }        
+    })
 
+    //女鞋增加商品提交
+    $shoesAddSub.on('click', function() {
+        if($.trim($shoesAddName.val()).length == 0 || $.trim($shoesAddPrice.val()).length == 0 || $.trim($shoesAddFlag.val()).length == 0 || $shoesAddFile.val().length == 0) {
+            var str = '女鞋商品信息不能为空';
+            $('#shoesAdd_ .errInfo').text(str);
+            return false;
+        }else if($shoesAddFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($shoesAddFile.val())){
+            var str = '请选择图片格式文件上传';
+            $('#shoesAdd_ .errInfo').text(str);
+            return false;
+        }else {
+            $shoesAddForm.submit();
+        }
+    })
+
+    //女鞋编辑商品
+    $shoesEditSub.on('click', function() {
+        if($.trim($shoesEditName.val()).length == 0 && $.trim($shoesEditPrice.val()).length == 0 && $shoesEditFile.val().length == 0) {
+            var str = '商品编辑信息不能全部为空';
+            $('#shoesEdit_ .errInfo').text(str);
+            return false;
+        }else if($shoesEditFile.val() && !/\.(gif|jpg|jpeg|bmp|png|tiff|GIF|JPG|PNG|JPEG|BMP|TIFF)$/.test($shoesEditFile.val())){
+            var str = '请选择图片格式文件上传';
+            $('#shoesEdit_ .errInfo').text(str);
+            return false;
+        }else {
+            $shoesEditForm.submit();
+        }
+    })
+
+    //女鞋删除商品
+    $shoesDelSub.on('click', function() {
+        if($('.noShoes').text() == '没有上架的商品，无法删除商品，请增加女鞋上架') {
+            alert('没有任何可删除的商品，请上架女鞋');
+            return false;
+        }else {
+           if(confirm('确定要删除该商品吗？')) {
+                $shoesDelForm.submit();
+            }else {
+                return false;
+            } 
+        }        
+    })
 })

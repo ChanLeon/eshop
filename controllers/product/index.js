@@ -35,7 +35,7 @@ module.exports = function(router) {
 
     router.get('/womenBag', auth, function(req, res) {
         var bagsArr = [];
-    	bagsPic.find({}, null, null, function(err, bagResult) {
+    	bagsPic.find(function(err, bagResult) {
     		if(err){
     			logger.info('查询女包数据出错', err);
                 res.render('contact/rs', {
@@ -60,14 +60,34 @@ module.exports = function(router) {
     })
 
     router.get('/womenShoes', auth, function(req, res) {
-        res.render('product/womenShoes',{
-            womenShoes: 'womenShoes'
+        var shoesArr = [];
+        shoesPic.find(function(err, shoesResult) {
+            if(err){
+                logger.info('查询女鞋数据出错', err);
+                res.render('contact/rs', {
+                    err: '查询女鞋数据出错',
+                    cb: '/home/index'
+                });
+            }else {
+                logger.info('shoesResult', shoesResult);
+                shoesResult.forEach(function(pic) {
+                    shoesArr.push(pic.picUrl.split('/eshop/public')[1]);
+                })
+                req.session.shoesArr = shoesArr;  //路径数组
+                req.session.shoesResult = shoesResult; //数据库所有数据数组
+                res.locals.shoesResult = shoesResult;
+                res.locals.shoesArr = shoesArr;
+                logger.info('shoesArr====', shoesArr); 
+                res.render('product/womenShoes',{
+                    womenShoes: 'womenShoes'
+                });            
+            }
         });
     })
 
-    router.get('/childCloth', auth, function(req, res) {
-        res.render('product/childCloth',{
-            childCloth: 'childCloth'
-        });
-    })
+    // router.get('/childCloth', auth, function(req, res) {
+    //     res.render('product/childCloth',{
+    //         childCloth: 'childCloth'
+    //     });
+    // })
 }

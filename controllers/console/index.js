@@ -28,6 +28,12 @@ module.exports = function(router){
             var picNumber = req.session.scrollPicNum;            
             res.locals.clothesArr = req.session.clothesArr;  //女装图片路径数组
             res.locals.clothResult = req.session.clothResult;  //女装图片数据数组
+
+            res.locals.bagsArr = req.session.bagsArr;  //女包图片路径数组
+            res.locals.bagResult = req.session.bagResult;  //女包图片数据数组
+
+            res.locals.shoesArr = req.session.shoesArr;  //女鞋图片路径数组
+            res.locals.shoesResult = req.session.shoesResult;  //女鞋图片数据数组
             console.log('picNumber', picNumber);
             res.render('console/index', {
                 console: 'console',
@@ -45,11 +51,13 @@ module.exports = function(router){
     router.post('/admin/upload', function(req, res) {
 
         var thePath = ['scroll', 'create'].indexOf(req.body.scrollPic) > -1 && '../../public/scroll' || ['clothAdd' , 'clothEdit' , 'clothDel'].indexOf(req.body.scrollPic) > -1 && '../../public/clothes' || ['bagsAdd','bagsEdit','bagsDel'].indexOf(req.body.scrollPic) > -1 && '../../public/bags' || '../../public/shoes'
-
         console.log('thePath', thePath);
         var picCond = req.body;
         console.log('pic cond=====', picCond);
         var picTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        var addDb = ['clothAdd' , 'clothEdit' , 'clothDel'].indexOf(req.body.scrollPic) > -1 && ladyPic || ['bagsAdd','bagsEdit','bagsDel'].indexOf(req.body.scrollPic) > -1 && bagsPic || shoesPic
+        var addLink = ['clothAdd' , 'clothEdit' , 'clothDel'].indexOf(req.body.scrollPic) > -1 && '/product/womenCloth' || ['bagsAdd','bagsEdit','bagsDel'].indexOf(req.body.scrollPic) > -1 && '/product/womenBag' || '/product/womenShoes'
+        var addSplit = picCond.scrollPic == 'clothAdd' ? '/eshop/public/clothes/' : picCond.scrollPic == 'bagsAdd' ? '/eshop/public/bags/' : '/eshop/public/shoes/';
         if(req.files.file && req.files.file.name) {
             try {
                 var temName = req.files.file.name;
@@ -87,6 +95,8 @@ module.exports = function(router){
                         }else if(picCond.picName != '' && picCond.picPrice != '') {
                             cond.picPrice = picCond.picPrice;
                             cond.picName = picCond.picName;
+                        }else {
+                            null;
                         }
                         logger.info('cond====', cond);
                     }
@@ -137,9 +147,7 @@ module.exports = function(router){
                             }                
                         }) 
                     }else if(picCond.scrollPic == 'clothAdd' || picCond.scrollPic == 'bagsAdd' || picCond.scrollPic == 'shoesAdd') {
-                        var addDb = picCond.scrollPic == 'clothAdd' ? ladyPic : picCond.scrollPic == 'bagsAdd' ? bagsPic : shoesPic;
-                        var addLink = picCond.scrollPic == 'clothAdd' ? '/product/womenCloth' : picCond.scrollPic == 'bagsAdd' ? '/product/womenBag' : '/product/womenShoes';
-                        var addSplit = picCond.scrollPic == 'clothAdd' ? '/eshop/public/clothes/' : picCond.scrollPic == 'bagsAdd' ? '/eshop/public/bags/' : '/eshop/public/shoes/';
+                        
                         async.auto({
                             'searchResult': function(cb) {
                                 addDb.find(function(error, searchData) {
@@ -157,42 +165,60 @@ module.exports = function(router){
                             },
                             'createResult': ['searchResult', function(callback, cbSearchResult) {
                                 var searchArr = cbSearchResult.searchResult;
-                                searchArr.forEach(function(goodsData, i) {
-                                    var goodsName = goodsData.picUrl.split(addSplit)[1];
-                                    var goodsFlag = goodsData.picFlat;
-                                    if(goodsName == temName && goodsFlag == picCond.flag) {
-                                        callback(null, {
-                                            err: '图片名称重复与图片标识号重复',
-                                            cb: '/console/admin/upload'
-                                        });
-                                    }else if(goodsName == temName && goodsFlag != picCond.flag) {
-                                       callback(null, {
-                                            err: '图片名称重复',
-                                            cb: '/console/admin/upload'
-                                        });
-                                    }else if(goodsName != temName && goodsFlag == picCond.flag) {
-                                       callback(null, {
-                                            err: '图片标识重复',
-                                            cb: '/console/admin/upload'
-                                        });
-                                    }else {
-                                        addDb.create(cond, function(err_, clothResult){
-                                            if(err_){
-                                                logger.info('创建数据库出错', err_);
-                                                callback({
-                                                    err: '创建数据库出错',
-                                                    cb: '/console/admin/upload'
-                                                });
-                                            }else {
-                                                logger.info('创建数据库成功', clothResult);
-                                                callback(null,  {
-                                                    err: '成功增加商品',
-                                                    cb: addLink
-                                                });                                                             
-                                            }                
-                                        })
-                                    }                                   
-                                })
+                                if(searchArr.length == 0) {
+                                    addDb.create(cond, function(err_, clothResult){
+                                        if(err_){
+                                            logger.info('创建数据库出错', err_);
+                                            callback({
+                                                err: '创建数据库出错',
+                                                cb: '/console/admin/upload'
+                                            });
+                                        }else {
+                                            logger.info('创建数据库成功', clothResult);
+                                            callback(null,  {
+                                                err: '成功增加商品',
+                                                cb: addLink
+                                            });                                                             
+                                        }                
+                                    })
+                                }else {
+                                    searchArr.forEach(function(goodsData, i) {
+                                        var goodsName = goodsData.picUrl.split(addSplit)[1];
+                                        var goodsFlag = goodsData.picFlat;
+                                        if(goodsName == temName && goodsFlag == picCond.flag) {
+                                            callback(null, {
+                                                err: '图片名称重复与图片标识号重复',
+                                                cb: '/console/admin/upload'
+                                            });
+                                        }else if(goodsName == temName && goodsFlag != picCond.flag) {
+                                           callback(null, {
+                                                err: '图片名称重复',
+                                                cb: '/console/admin/upload'
+                                            });
+                                        }else if(goodsName != temName && goodsFlag == picCond.flag) {
+                                           callback(null, {
+                                                err: '图片标识重复',
+                                                cb: '/console/admin/upload'
+                                            });
+                                        }else {
+                                            addDb.create(cond, function(err_, clothResult){
+                                                if(err_){
+                                                    logger.info('创建数据库出错', err_);
+                                                    callback({
+                                                        err: '创建数据库出错',
+                                                        cb: '/console/admin/upload'
+                                                    });
+                                                }else {
+                                                    logger.info('创建数据库成功', clothResult);
+                                                    callback(null,  {
+                                                        err: '成功增加商品',
+                                                        cb: addLink
+                                                    });                                                             
+                                                }                
+                                            })
+                                        }                                   
+                                    })
+                                }
                             }]
                         }, function(err, clothAddResult) {
                             if(err) {
@@ -201,12 +227,12 @@ module.exports = function(router){
                                 res.render('contact/rs', clothAddResult.createResult);
                             }
                         })
-                    }else if(picCond.scrollPic == 'clothEdit') {
-                        ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
+                    }else if(picCond.scrollPic == 'clothEdit' || picCond.scrollPic == 'bagsEdit' || picCond.scrollPic == 'shoesEdit') {
+                        addDb.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
                             '$set':cond
                         },{
                             'upsert': true
-                        }, function(err, clothEditResult){
+                        }, function(err, editResult){
                             if(err){
                                 logger.info('编辑商品出错', err);
                                 res.render('contact/rs', {
@@ -214,10 +240,10 @@ module.exports = function(router){
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
-                                logger.info('scroll result==', clothEditResult);
+                                logger.info('scroll result==', editResult);
                                 res.render('contact/rs', {
                                     err: '编辑商品完成',
-                                    cb: '/product/womenCloth'
+                                    cb: addLink
                                 });
                             }                
                         }) 
@@ -241,11 +267,13 @@ module.exports = function(router){
                 }else if(picCond.picName != '' && picCond.picPrice != '') {
                     cond.picPrice = picCond.picPrice;
                     cond.picName = picCond.picName;
+                }else {
+                    null;
                 }
-                logger.info('cond====', cond);
+                logger.info('cond====clh', cond);
 
-                if(picCond.scrollPic == 'clothEdit') {
-                    ladyPic.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
+                if(picCond.scrollPic == 'clothEdit' || picCond.scrollPic == 'bagsEdit' || picCond.scrollPic == 'shoesEdit') {
+                    addDb.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
                         '$set':cond
                     },{
                         'upsert': true
@@ -259,14 +287,14 @@ module.exports = function(router){
                         }else {
                             res.render('contact/rs', {
                                 err: '编辑商品完成',
-                                cb: '/product/womenCloth'
+                                cb: addLink
                             });
                         }                
                     }) 
-                }else if(picCond.scrollPic == 'clothDel') {
+                }else if(picCond.scrollPic == 'clothDel'|| picCond.scrollPic == 'bagsDel' || picCond.scrollPic == 'shoesDel') {
                     async.series({
                         'searchPic': function(cb) {
-                            ladyPic.findOne({picFlat: parseInt(picCond.flag)}, function(err, searchPicInfo) {
+                            addDb.findOne({picFlat: parseInt(picCond.flag)}, function(err, searchPicInfo) {
                                 if(err) {
                                     logger.info('查询被删除商品信息出错', err);
                                     cb({
@@ -280,35 +308,35 @@ module.exports = function(router){
                             })
                         },
                         'removeInfo': function(callback) {
-                            ladyPic.remove({picFlat: parseInt(picCond.flag)}, function(err) {
+                            addDb.remove({picFlat: parseInt(picCond.flag)}, function(err) {
                                 if(err){
-                                    logger.info('删除女装商品出错', err);
+                                    logger.info('删除商品出错', err);
                                     callback({
-                                        err: '删除女装商品出错',
+                                        err: '删除商品出错',
                                         cb: '/console/admin/upload'
                                     }); 
                                 }else {
-                                    logger.info('删除女装商品成功');
+                                    logger.info('删除商品成功');
                                     callback(null, {
                                         err: '删除商品成功',
-                                        cb: '/product/womenCloth'
+                                        cb: addLink
                                     }); 
                                 } 
                             })
                         }
-                    }, function(err, clothDelInfo) {
+                    }, function(err, goodsDelInfo) {
                         if(err) {
                             res.render('contact/rs',err);
                         }else {
-                            logger.info('查询被删除商品的存储url信息', clothDelInfo.searchPic);
-                            var picUrlInfo = clothDelInfo.searchPic;
+                            logger.info('查询被删除商品的存储url信息', goodsDelInfo.searchPic);
+                            var picUrlInfo = goodsDelInfo.searchPic;
                             if(picUrlInfo) {
                                 fs.unlinkSync(picUrlInfo);
-                                res.render('contact/rs',clothDelInfo.removeInfo);
+                                res.render('contact/rs',goodsDelInfo.removeInfo);
                             }else {
                                 res.render('contact/rs',{
                                     err: '商品的路径不存在，删除失败',
-                                    cb: '/product/womenCloth'
+                                    cb: addLink
                                 });
                             }
                         }
