@@ -3,6 +3,13 @@
   background-color: #444;
   color: rgba(255, 255, 255, 0.4); 
 }
+.footer .topReturn {
+  cursor:pointer;
+  position:fixed;
+  bottom:100px;
+  right:50px;
+  z-index:999
+}
 .footer .top {
 	width:100%;
 	margin:10px auto;

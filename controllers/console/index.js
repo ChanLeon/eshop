@@ -165,6 +165,7 @@ module.exports = function(router){
                             },
                             'createResult': ['searchResult', function(callback, cbSearchResult) {
                                 var searchArr = cbSearchResult.searchResult;
+                                logger.info('searchArr=-=-=-=', searchArr);
                                 if(searchArr.length == 0) {
                                     addDb.create(cond, function(err_, clothResult){
                                         if(err_){
@@ -182,42 +183,52 @@ module.exports = function(router){
                                         }                
                                     })
                                 }else {
-                                    searchArr.forEach(function(goodsData, i) {
-                                        var goodsName = goodsData.picUrl.split(addSplit)[1];
-                                        var goodsFlag = goodsData.picFlat;
-                                        if(goodsName == temName && goodsFlag == picCond.flag) {
+                                    var flagTag = 0;
+                                    for(var i = 0,leng = searchArr.length; i < leng; i++) {
+                                        var goodsName = searchArr[i].picUrl.split(addSplit)[1];
+                                        var goodsFlag = searchArr[i].picFlat;
+
+                                        if(goodsName == temName && goodsFlag == parseInt(picCond.flag)) {
+                                            flagTag = 1;
                                             callback(null, {
                                                 err: '图片名称重复与图片标识号重复',
                                                 cb: '/console/admin/upload'
                                             });
-                                        }else if(goodsName == temName && goodsFlag != picCond.flag) {
+                                            break;
+                                        }else if(goodsName == temName && goodsFlag != parseInt(picCond.flag)) {
+                                            flagTag = 2;
                                            callback(null, {
                                                 err: '图片名称重复',
                                                 cb: '/console/admin/upload'
                                             });
-                                        }else if(goodsName != temName && goodsFlag == picCond.flag) {
+                                            break;
+                                        }else if(goodsName != temName && goodsFlag == parseInt(picCond.flag)) {
+                                            flagTag = 3;
                                            callback(null, {
                                                 err: '图片标识重复',
                                                 cb: '/console/admin/upload'
                                             });
-                                        }else {
-                                            addDb.create(cond, function(err_, clothResult){
-                                                if(err_){
-                                                    logger.info('创建数据库出错', err_);
-                                                    callback({
-                                                        err: '创建数据库出错',
-                                                        cb: '/console/admin/upload'
-                                                    });
-                                                }else {
-                                                    logger.info('创建数据库成功', clothResult);
-                                                    callback(null,  {
-                                                        err: '成功增加商品',
-                                                        cb: addLink
-                                                    });                                                             
-                                                }                
-                                            })
-                                        }                                   
-                                    })
+                                            break;
+                                        } 
+                                    }
+                                    if(flagTag == 0){
+                                        console.log('我也走到这里了');
+                                        addDb.create(cond, function(err_, clothResult){
+                                            if(err_){
+                                                logger.info('创建数据库出错', err_);
+                                                callback({
+                                                    err: '创建数据库出错',
+                                                    cb: '/console/admin/upload'
+                                                });
+                                            }else {
+                                                logger.info('创建数据库成功', clothResult);
+                                                callback(null,  {
+                                                    err: '成功增加商品',
+                                                    cb: addLink
+                                                });                                                             
+                                            }                
+                                        })
+                                    }
                                 }
                             }]
                         }, function(err, clothAddResult) {

@@ -114,6 +114,7 @@ $(document).ready(function(){
             return false;
         }else {
             $clothAddForm.submit();
+            return false;
         }
     })
 
