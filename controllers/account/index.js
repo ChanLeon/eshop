@@ -24,8 +24,8 @@ module.exports = function(router) {
     //登录
     router.post('/login', function(req, res) {
         var loginTime = moment().format('YYYY-MM-DD HH:mm:ss');
-        if(req.body.username == 'zhihaoadmin@eshop.com' && req.body.passwd == 'admin@#$7352313'){
-            userInfo.findOneAndUpdate({username: 'zhihaoadmin@eshop.com'},{
+        if(req.body.username == 'xxx' && req.body.passwd == 'xxxx'){
+            userInfo.findOneAndUpdate({username: 'xxx'},{
                 '$set':{
                     'login_time':loginTime
                 }
