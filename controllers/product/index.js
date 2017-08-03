@@ -17,15 +17,13 @@ module.exports = function(router) {
                     cb: '/home/index'
                 });
     		}else {
-    			logger.info('clothResult', clothResult);
                 clothResult.forEach(function(pic) {
                     clothesArr.push(pic.picUrl.split('/eshop/public')[1]);
                 })
-                req.session.clothesArr = clothesArr;  //路径数组
-                req.session.clothResult = clothResult; //数据库所有数据数组
+                req.session.clothesArr = clothesArr;  //女装图片路径数组
+                req.session.clothResult = clothResult;  //女装图片数据数组
                 res.locals.clothResult = clothResult;
                 res.locals.clothesArr = clothesArr;
-                logger.info('clothesArr====', clothesArr);
                 res.render('product/womenCloth',{
                     womenCloth: 'womenCloth'
                 });    			
@@ -43,15 +41,13 @@ module.exports = function(router) {
                     cb: '/home/index'
                 });
     		}else {
-    			logger.info('bagResult', bagResult);
                 bagResult.forEach(function(pic) {
                     bagsArr.push(pic.picUrl.split('/eshop/public')[1]);
                 })
-                req.session.bagsArr = bagsArr;  //路径数组
-                req.session.bagResult = bagResult; //数据库所有数据数组
+                req.session.bagsArr = bagsArr;  //女包图片路径数组
+                req.session.bagResult = bagResult;  //女包图片数据数组
                 res.locals.bagResult = bagResult;
                 res.locals.bagsArr = bagsArr;
-                logger.info('bagsArr====', bagsArr);
                 res.render('product/womenBag',{
                     womenBag: 'womenBag'
                 });   			
@@ -69,25 +65,17 @@ module.exports = function(router) {
                     cb: '/home/index'
                 });
             }else {
-                logger.info('shoesResult', shoesResult);
                 shoesResult.forEach(function(pic) {
                     shoesArr.push(pic.picUrl.split('/eshop/public')[1]);
                 })
-                req.session.shoesArr = shoesArr;  //路径数组
-                req.session.shoesResult = shoesResult; //数据库所有数据数组
                 res.locals.shoesResult = shoesResult;
                 res.locals.shoesArr = shoesArr;
-                logger.info('shoesArr====', shoesArr); 
+                req.session.shoesArr = shoesArr;  //女鞋图片路径数组
+                req.session.shoesResult = shoesResult;  //女鞋图片数据数组
                 res.render('product/womenShoes',{
                     womenShoes: 'womenShoes'
                 });            
             }
         });
     })
-
-    // router.get('/childCloth', auth, function(req, res) {
-    //     res.render('product/childCloth',{
-    //         childCloth: 'childCloth'
-    //     });
-    // })
 }

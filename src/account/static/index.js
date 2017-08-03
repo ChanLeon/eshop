@@ -50,16 +50,6 @@ $(document).ready(function(){
         }
     })
 
-    // $loginSub.on('click', function(){
-    //     if($.trim($userName.val()).length == 0 || $.trim($passWord.val()).length == 0) {
-    //         var str = '*亲，用户名或密码不能为空';
-    //         $('.errInfo').text(str);
-    //         return false;
-    //     }else {
-    //         $loginForm.submit();
-    //     }
-    // })
-
     $loginForm.on('submit', function(e){
         if($.trim($userName.val()).length == 0 || $.trim($passWord.val()).length == 0) {
             var str = '*亲，用户名或密码不能为空';

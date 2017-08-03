@@ -5,7 +5,6 @@ $(document).ready(function(){
     let $brand = $('#brand_url>a');
     $contact.hover(function(){
         $(this).find('span').attr('class', 'glyphicon glyphicon-triangle-top');
-        // $(this).find('.dropdown-menu').css('display','block');
         $(this).find('.dropdown-menu').slideDown(500);
     },function(){
         $(this).find('span').attr('class', 'glyphicon glyphicon-triangle-bottom');

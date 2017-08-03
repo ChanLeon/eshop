@@ -8,7 +8,7 @@
 
     "mongoConfig": {
 		// "host": "127.0.0.1",
-		"host": "192.168.33.10",
+		"host": "172.18.214.229",
         "database": "eshop"
 	},
 

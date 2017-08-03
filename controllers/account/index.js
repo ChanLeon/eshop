@@ -9,7 +9,6 @@ let auth = require('../../lib/auth').auth;
 
 module.exports = function(router) {
     router.get('/auto_login', function(req, res, next){
-		logger.info('router in auto login --->');
 		res.render('account/autoLogin', {
 			username: req.session.regUserName,
 			passwd: req.session.regPasswd
@@ -25,8 +24,8 @@ module.exports = function(router) {
     //登录
     router.post('/login', function(req, res) {
         var loginTime = moment().format('YYYY-MM-DD HH:mm:ss');
-        if(req.body.username == 'zhihaoadmin' && req.body.passwd == 'admin@#$7352313'){
-            userInfo.findOneAndUpdate({username: 'zhihaoadmin'},{
+        if(req.body.username == 'zhihaoadmin@eshop.com' && req.body.passwd == 'admin@#$7352313'){
+            userInfo.findOneAndUpdate({username: 'zhihaoadmin@eshop.com'},{
                 '$set':{
                     'login_time':loginTime
                 }
@@ -61,7 +60,6 @@ module.exports = function(router) {
                         cb: '/account/login'
                     });
                 }else {
-                    logger.info('result是什么', result);
                     if(result == null || result == '' || result == undefined){
                         res.render('contact/rs', {
                             err: '用户名或密码错误',
@@ -102,7 +100,6 @@ module.exports = function(router) {
                         logger.info('注册数据入库前查找用户名信息失败', err);
                         callback(err);
                     }else {
-                        logger.info('查找用户名信息', result);
                         callback(null, result.length);
                     }
                 })
@@ -144,7 +141,6 @@ module.exports = function(router) {
                     cb: '/account/register'
                 });
             }else {
-                logger.info('data===', data);
                 if(data.findInfo != 0){
                     res.render('contact/rs', {
 						err: data.createInfo.detail,

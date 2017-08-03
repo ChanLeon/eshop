@@ -98,7 +98,6 @@ module.exports = function(router){
                         }else {
                             null;
                         }
-                        logger.info('cond====', cond);
                     }
                     if(picCond.scrollPic == 'create') {
                         picInfo.create(condition, function(err, result){
@@ -109,7 +108,6 @@ module.exports = function(router){
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
-                                logger.info('create result==', result);
                                 picInfo.count(function(error, data) {
                                     if(error) {
                                         logg.info('查询picInfo集合中的文档数错误', error);
@@ -142,7 +140,6 @@ module.exports = function(router){
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
-                                logger.info('scroll result==', result);
                                 res.redirect('/home/index')
                             }                
                         }) 
@@ -165,7 +162,6 @@ module.exports = function(router){
                             },
                             'createResult': ['searchResult', function(callback, cbSearchResult) {
                                 var searchArr = cbSearchResult.searchResult;
-                                logger.info('searchArr=-=-=-=', searchArr);
                                 if(searchArr.length == 0) {
                                     addDb.create(cond, function(err_, clothResult){
                                         if(err_){
@@ -175,7 +171,7 @@ module.exports = function(router){
                                                 cb: '/console/admin/upload'
                                             });
                                         }else {
-                                            logger.info('创建数据库成功', clothResult);
+                                            logger.info('创建数据库成功');
                                             callback(null,  {
                                                 err: '成功增加商品',
                                                 cb: addLink
@@ -221,7 +217,7 @@ module.exports = function(router){
                                                     cb: '/console/admin/upload'
                                                 });
                                             }else {
-                                                logger.info('创建数据库成功', clothResult);
+                                                logger.info('创建数据库成功');
                                                 callback(null,  {
                                                     err: '成功增加商品',
                                                     cb: addLink
@@ -251,11 +247,19 @@ module.exports = function(router){
                                     cb: '/console/admin/upload'
                                 }); 
                             }else {
-                                logger.info('scroll result==', editResult);
-                                res.render('contact/rs', {
-                                    err: '编辑商品完成',
-                                    cb: addLink
-                                });
+                                var picUrlInfo = editResult.picUrl;
+                                if(picUrlInfo) {
+                                    fs.unlinkSync(picUrlInfo);
+                                    res.render('contact/rs', {
+                                        err: '编辑商品完成',
+                                        cb: addLink
+                                    });
+                                }else {
+                                    res.render('contact/rs', {
+                                        err: '商品的路径不存在，删除失败',
+                                        cb: '/console/admin/upload'
+                                    });
+                                }                                
                             }                
                         }) 
                     }                  
@@ -281,7 +285,6 @@ module.exports = function(router){
                 }else {
                     null;
                 }
-                logger.info('cond====clh', cond);
 
                 if(picCond.scrollPic == 'clothEdit' || picCond.scrollPic == 'bagsEdit' || picCond.scrollPic == 'shoesEdit') {
                     addDb.findOneAndUpdate({picFlat: parseInt(picCond.flag)}, {
@@ -339,7 +342,6 @@ module.exports = function(router){
                         if(err) {
                             res.render('contact/rs',err);
                         }else {
-                            logger.info('查询被删除商品的存储url信息', goodsDelInfo.searchPic);
                             var picUrlInfo = goodsDelInfo.searchPic;
                             if(picUrlInfo) {
                                 fs.unlinkSync(picUrlInfo);
